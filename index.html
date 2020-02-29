@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="theme-color" content="#04458F">
+	<meta name="msapplication-navbutton-color" content="#04458F">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#04458F">
+
+	<title>World of Cro</title>
+	<meta name="description" content="Welcome to Season 2 of WoC!">
+	<meta name="keywords" content="">
+	<meta name="author" content="MonsieurCro">
+
+	<link rel="shortcut icon" type="image/png" href="./favicon.png">
+	<!--<link rel="stylesheet" href="./styles.css?v=1.0">-->
+
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+	<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+
+	<style>
+		* {
+			outline: none;
+			outline-color: transparent;
+			-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			 -khtml-user-select: none;
+			   -moz-user-select: none;
+			    -ms-user-select: none;
+			     -o-user-select: none;
+			        user-select: none;
+		}
+		button, input[type="button"] {
+  		-webkit-appearance: none;
+  			 -moz-appearance: none;
+  			  -ms-appearance: none;
+  		margin: 0; padding: 0;
+  		border: none;
+  		background: none;
+  		cursor: pointer;
+  	}
+		body {
+			font-family: Ubuntu,sans-serif;
+			background-color: #04458F;
+			margin: 0; padding: 0;
+			width: 100%; min-height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.fadeOut {
+			opacity: 0;
+			transition: all 1s;
+		}
+		.fadeIn {
+			opacity: 1;
+			transition: all 1s;
+		}
+		.hidden {
+			display: none;
+			opacity: 0;
+		}
+		#bg-image {
+			background-image: url(./assets/background.jpg);
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center center;
+			opacity: .25;
+			overflow: hidden;
+  		/*filter: blur(5px);
+  			-webkit-filter: blur(5px);*/
+  		height: 104vh; width: 104vw;
+  		position: fixed;
+  		top: -2vh; left: -2vw; right: -2vw; bottom: -2vh;
+  		z-index: -1;
+  	}
+    #snowCanva {
+      width: 100%; height: 100%;
+    }
+    .container {
+      width: 80%; max-width: 1200px;
+      background: transparent;
+      padding: 0;
+      text-align: center;
+    }
+    #pop {
+      position: fixed;
+      bottom: 12.5%; left: 0;
+      z-index: 1000;
+      width: 85%; max-width: 320px;
+      padding: 30px;
+      transform: translateX(-100%);
+      transition: transform 250ms linear;
+      color: white;
+      background: linear-gradient(135deg, #1273EB, #04458F);
+    }
+    #pop.show {
+      transform: translateX(0%);
+      box-shadow: 0 0 15px rgba(29, 38, 45, .65);
+    }
+    #pop::before, #pop::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      background-repeat: no-repeat;
+      background-position: bottom right;
+    }
+    #pop::before {
+      background-image: url();
+      background-size: 230px auto;
+    }
+    #pop::after {
+      background-image: url();
+      background-size: 149px auto;
+    }
+    #pop #close {
+      position: absolute;
+      top: 0; right: 0;
+      width: 20px; height: 20px;
+      font-size: 20px; line-height: 20px;
+      z-index: 2;
+      color: white;
+      background-color: #143B63;
+      padding: 7px;
+      box-sizing: content-box;
+    }
+    #pop #gift {
+      position: absolute;
+      top: 100%; left: 100%;
+      z-index: 2;
+      width: 120px; height: 120px;
+      transform: translateX(-55%) translateY(-65%);
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 100% auto;
+      background-image: url(./assets/captaincro.png)
+    }
+    #pop .content {
+      position: relative;
+      max-width: 250px;
+      z-index: 3;
+    }
+    button.cta {
+      display: inline-block;
+      position: relative;
+      height: 30px; line-height: 30px;
+      margin: 7.5px 0;
+      padding: 0 1em;
+      border-radius: 3px;
+      color: white;
+      background-color: red;
+      font-size: .9em;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    button.cta:hover {
+      background-color: #333;
+      transition: all 250ms ease;
+    }
+    footer {
+      background-color: rgba(20, 59, 99, .75);
+      text-align: center;
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+    }
+    footer a {
+      color: rgba(255, 255, 255, .85);
+      font-size: .7rem;
+      line-height: 1.5rem;
+      text-decoration: none;
+    }
+    footer a:hover {
+      color: rgba(255, 255, 255, 1);
+      transition: all 250ms ease;
+    }
+    @media (max-width: 600px){
+      .container {
+        width: 90%;
+      }
+      #game {
+        height: 600px;
+      }
+    }
+    @media (max-width: 400px){
+      .container {
+        width: 100%;
+      }
+      #game {
+        height: 550px;
+      }
+    }
+
+    .swing {
+      animation: swing ease-in-out 1s infinite alternate;
+      transform-origin: center -20px;
+    }
+    @keyframes swing {
+      0%   { transform: rotate(.5deg);  }
+      100% { transform: rotate(-.5deg); }
+    }
+  </style>
+</head>
+<body>
+ 	<div id="bg-image">
+    <canvas id="snow-canva"></canvas>
+  </div>
+
+  	<div class="container">
+  		<iframe id="game" name="game" frameborder="1" height="650" width="100%" target="_blank" align="center" scrolling="no" style="border-width:0;" src="https://www.luckycycle.com/play/rw6qbvw4canxqmzmen5ncv3b?unplay=1">
+  		<!--https://clients.luckycycle.com/demo/#363fe630809ec8db1427839b58b0fce8_fr-->
+  			<p>Ton navigateur ne supporte apparemment pas les iframes. Comment est-ce possible&nbsp;?</p>
+  		</iframe>
+  	</div>
+
+  	<div id="pop">
+  		<div class="content">
+  			<h3>Besoin d'aide ?</h3>
+  			<p>Consulte la <strong>première saison</strong>.</p>
+  			<a href="http://www.worldofcro.ga/" target="_blank">
+  				<button class="cta">Par ici&nbsp;!</button>
+  			</a>
+  		</div>
+
+  		<button id="close" onclick="{document.getElementById('pop').classList.remove('show');}">✕</button>
+  		<button id="gift" onclick="{document.getElementById('pop').classList.toggle('show');}"></button>
+  	</div>
+
+  	<footer>
+  		<a href="https://www.dealabs.com/profile/MonsieurCro/overview" target="_blank">© MonsieurCro 2020</a>
+  	</footer>
+
+    <script src="./snow.js"></script>
+  </body>
+</html>
