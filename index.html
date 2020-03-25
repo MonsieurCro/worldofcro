@@ -10,7 +10,7 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="#333">
 
 	<title>A World of Cro</title>
-	<meta name="description" content="Bienvenue dans la saison 2 de 'A World of Cro' !">
+	<meta name="description" content="">
 	<meta name="keywords" content="">
 	<meta name="author" content="MonsieurCro">
 
@@ -58,19 +58,22 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			transition: background-color .45s ease .09s;
+			-webkit-transition: background-color .45s ease .09s;
+			   -moz-transition: background-color .45s ease .09s;
+					transition: background-color .45s ease .09s;
 		}
 		.fadeOut {
 			opacity: 0;
-			transition: all 1s;
+			z-index: -1 !important;
+			-webkit-transition: opacity 2.5s;
+			   -moz-transition: opacity 2.5s;   
+				    transition: opacity 2.5s;
 		}
 		.fadeIn {
 			opacity: 1;
-			transition: all 1s;
-		}
-		.hidden {
-			display: none;
-			opacity: 0;
+			-webkit-transition: opacity 5s;
+			   -moz-transition: opacity 5s;  
+				    transition: opacity 5s;
 		}
 		#bg-image {
 			background-image: url(./assets/background.jpg);
@@ -87,7 +90,7 @@
 		#snow-canva {
 			width: 100%; height: 100%;
 		}
-		.container {
+		#game-container {
 			width: 80%; max-width: 1200px;
 			background: transparent;
 			padding: 0;
@@ -100,7 +103,9 @@
 			width: 100%; max-width: 380px;
 			padding: 30px;
 			transform: translateX(-100%);
-			transition: transform 250ms linear;
+			-webkit-transition: transform .25s linear;
+			   -moz-transition: transform .25s linear;
+					transition: transform .25s linear;
 			color: white;
 			background-image: linear-gradient(135deg, #D9D9D9, #202020);
 			background-color: #D9D9D9;
@@ -155,7 +160,7 @@
 			max-width: 250px;
 			z-index: 3;
 		}
-		button.cta {
+		#pop button.cta {
 			display: inline-block;
 			position: relative;
 			height: 30px; line-height: 30px;
@@ -168,9 +173,24 @@
 			font-weight: 500;
 			cursor: pointer;
 		}
-		button.cta:hover {
+		#pop button.cta:hover {
 			background-color: #752937;
-			transition: all 250ms ease;
+			-webkit-transition: all .25s ease;
+			   -moz-transition: all .25s ease;
+					transition: all .25s ease;
+		}
+		#end {
+			position: absolute;
+			z-index: 999;
+			width: 70%; height: 70%;
+			text-align: center;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		#end img {
+			width: auto; height: auto;
+			max-width: 75%; max-height: 75%;
 		}
 		footer {
 			background-color: rgba(0, 0, 0, .15);
@@ -185,8 +205,20 @@
 			color: white;
 			text-decoration: none;
 		}
+		.pulse {
+			-webkit-animation: pulse ease-out 3s infinite;
+			animation: pulse ease-out 3s infinite;
+		}
+		@-webkit-keyframes pulse {
+			25%  	  { -webkit-transform: scale(1.05, 1.05); }
+			50%, 100% { -webkit-transform: scale(1, 1); }
+		}
+		@keyframes pulse {
+			25%       { transform: scale(1.05, 1.05); }
+			50%, 100% { transform: scale(1, 1); }
+		}
 		@media (max-width: 600px){
-			.container {
+			#game-container {
 				width: 90%;
 			}
 			#game {
@@ -194,7 +226,7 @@
 			}
 		}
 		@media (max-width: 400px){
-			.container {
+			#game-container {
 				width: 100%;
 			}
 		}
@@ -202,10 +234,10 @@
 </head>
 <body>
  	<div id="bg-image">
-    	<canvas id="snow-canva"></canvas>
+    	<canvas id="snow-canva" class="winter fadeOut"></canvas>
   	</div>
 
-  	<div class="container">
+  	<div id="game-container">
   		<iframe id="game" name="game" frameborder="1" height="650" width="100%" target="_blank" align="center" scrolling="no" style="border-width:0;" src="https://www.luckycycle.com/play/rw6qbvw4canxqmzmen5ncv3b?unplay=2">
   		<!--https://clients.luckycycle.com/demo/#363fe630809ec8db1427839b58b0fce8_fr-->
   			<p>Ton navigateur ne supporte apparemment pas les iframes. Comment est-ce possible&nbsp;?</p>
@@ -225,18 +257,37 @@
   		<button id="gift" onclick="{document.getElementById('pop').classList.toggle('show');}"></button>
   	</div>
 
+  	<div id="end" class="winter fadeOut">
+  		<a href="https://www.dealabs.com/discussions/jeux-steam-gratuits-gleam-woobox-etc-1071415" target="_blank">
+  			<img class="pulse" src="./assets/logoS2.png" />
+  		</a>
+  	</div>
+
   	<footer>
   		Made with <span style="color:#EC0000;">❤</span> by <a href="https://www.dealabs.com/profile/MonsieurCro/overview" target="_blank">MonsieurCro</a>
   	</footer>
 
-    <script src="./snow.js"></script>
     <script>
     	document.addEventListener('DOMContentLoaded', function(){
     		window.addEventListener('message', function(event){
     			var themeColor = event.data;
     			document.body.style.backgroundColor = themeColor;
+
+    			// End game
+    			if(themeColor == '#95B2D9'){
+    				setTimeout(function(){
+    					document.getElementById('game-container').classList.add('fadeOut');
+    					var winter = document.querySelectorAll('.winter');
+
+    					winter.forEach(function(item){
+    				  		item.classList.remove('fadeOut');
+    				  		item.classList.add('fadeIn');
+    					});
+    				}, 3000);
+    			};
 			}, false);
     	});
     </script>
+    <script src="./snow.js"></script>
   </body>
 </html>
