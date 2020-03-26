@@ -7,8 +7,7 @@ document.addEventListener('DOMContentLoaded', function(){
   mX = -100,
   mY = -100;
 
-  canva.width = document.getElementById('bg-image').offsetWidth;
-  canva.height = document.getElementById('bg-image').offsetHeight;
+  size(canva);
 
   function snow(){
     ctx.clearRect(0, 0, canva.width, canva.height);
@@ -94,10 +93,17 @@ document.addEventListener('DOMContentLoaded', function(){
     mY = e.clientY;
   });*/
     
-  window.addEventListener('resize orientationchange',function(){
-    canva.width = document.getElementById('bg-image').offsetWidth;
-    canva.height = document.getElementById('bg-image').offsetHeight;
+  window.addEventListener('resize',function(){
+    size(canva);
   });
+  window.addEventListener('orientationchange',function(){
+    size(canva);
+  });
+
+  function size(container){
+    canva.width = container.offsetWidth;
+    canva.height = container.offsetHeight;
+  }
     
   init();
 
