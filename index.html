@@ -232,9 +232,6 @@
       25%       { transform: scale(1.05, 1.05); }
       50%, 100% { transform: scale(1, 1); }
     }
-    @media (max-width: 600px){
-
-    }
   </style>
 </head>
 <body>
@@ -244,14 +241,23 @@
 
   <div id="lcframe">
     <h2>Chargement…</h2>
-    <p>Si rien ne se passe, merci de ne pas pleurer et d'essayer sur un autre navigateur.</p>
+    <p>Si rien ne se passe, merci de ne pas pleurer et d'essayer sur un autre navigateur&nbsp;!</p>
   </div>
+
   <script>
-    function poke(){
-      var OP_ID = '363fe630809ec8db1427839b58b0fce8';
+    var OP_ID = '363fe630809ec8db1427839b58b0fce8';
+    var POKE_ID = Date.now();
+
+    try {
+      if(localStorage.getItem('poke_id') && localStorage.getItem('poke_id') != 'null'){
+        POKE_ID = localStorage.getItem('poke_id');
+      };
+    } catch(event) { console.log(event); };
+
+    function poke(OP_ID, POKE_ID){
       window._lcdata = Object.assign({
-        item_uid : Date.now(),
-        user_uid : Date.now(),
+        item_uid : POKE_ID,
+        user_uid : POKE_ID,
         language : 'fr',
         item_value : 1
       });
@@ -260,8 +266,12 @@
       _frf.setAttribute('src', 'https://www.luckycycle.com/client/fjs/' + OP_ID + '.js');
       _frf.async = !0;
       document.getElementsByTagName('head')[0].appendChild(_frf);
+
+      try {
+        localStorage.setItem('poke_id', POKE_ID);
+      } catch(event) { console.log(event); };
     };
-    poke();
+    poke(OP_ID, POKE_ID);
   </script>
 
   <div id="pop">
