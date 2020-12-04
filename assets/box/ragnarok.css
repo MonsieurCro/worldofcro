@@ -1,0 +1,328 @@
+* {
+  outline: none;
+  outline-color: transparent;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  user-drag: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+*:not(input):not(select) {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+button, input[type="button"], .button, #box-button-home {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  margin: 0; padding: 0 !important;
+  border: none;
+  background: none;
+  cursor: pointer;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  transition: all .3s ease;
+
+  color: white;
+  background-color: rgba(0, 0, 0, .5);
+  border-radius: 5px !important;
+  border: 1px solid white !important;
+  font-size: 1em !important;
+  margin: 0 auto; padding: 0;
+  height: 45px !important; line-height: 0 !important;
+  width: 200px !important;
+  box-shadow: 0 8px 17px rgba(0, 0, 0, .2), 0 6px 20px rgba(0, 0, 0, .19) !important;
+  text-align: center;
+  box-sizing: border-box;
+  font-family: inherit;
+  transition: all .3s ease;
+}
+button:hover, input[type="button"]:hover, .button:hover, #box-button-home:hover {
+  color: #232323 !important;
+  background-color: white;
+  transition: all .3s ease;
+}
+/* GENERAL */
+#box {
+  background-image: none !important;
+  background-image: url(https://monsieurcro.github.io/worldofcro/assets/ragnarok_box.jpg) !important;
+  background-size: cover !important;
+  background-repeat: no-repeat;
+  background-position: center left !important;
+  background-color: #333 !important;
+}
+#box b {
+  font-weight: 700;
+}
+#box #box-logo {
+  background-image: url(https://monsieurcro.github.io/worldofcro/assets/ragnarok_logo.png) !important;
+  background-size: auto 75% !important;
+  background-repeat: no-repeat;
+  background-position: center 75%;
+  background-color: rgba(0, 0, 0, .15);
+}
+#box .box-header {
+  height: 100px !important;
+  background-color: white;
+}
+#box .box-header h2 {
+  font-size: 100% !important; line-height: 110% !important;
+  color: #333 !important;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+#box-home.box-panel, #box-game.box-panel, #box-refund-post.box-panel, #box-refund-contact.box-panel, #box-refund-rib.box-panel, #box-thanks.box-panel, #box-won .box-panel, #box-share.box-panel, #box-cannot.box-panel {
+  height: calc(100% - 100px - 20px) !important;
+}
+#box-home-panel, #box-game .box-content, #box-refund-post .box-content, #box-refund-contact .box-content, #box-refund-rib .box-content, #box-thanks .box-content, #box-won .box-content, #box-share .box-content, #box-cannot .box-content {
+  margin-top: 0;
+  height: calc(100% - 100px) !important;
+  min-height: unset !important;
+}
+#box #box-footer {
+  color: white !important;
+  background-color: #232323 !important;
+	cursor: default;
+  z-index: 1001;
+}
+#box-footer span, .box-small-logo, #box-infos {
+  display: none !important;
+}
+#particules {
+  width: 100% !important;
+  height: calc(100% - 20px) !important;
+  z-index: 999;
+}
+.info {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  padding: 1.5% 2.5%;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 75%;
+  font-style: italic;
+  color: white;
+}
+/* HOME */
+#box-home #box-home-panel {
+  background-image: none !important;
+  background-size: auto 100% !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-color: transparent;
+  padding: 0;
+}
+#box-home #box-button-home {
+  position: absolute;
+  bottom: 80px; top: auto;
+  left: 0; right: 0; margin: 0 auto;
+  z-index: 3;
+}
+#box-home #box-button-home:hover span {
+  color: black;
+}
+#box-home #box-home-prompt {
+  font-size: 90% !important;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: auto;
+  width: 100%;
+  padding: .5em .75em;
+  background-color: white !important;
+  border-radius: 0;
+  border-top: 1px solid #D8D8D8;
+  box-shadow: none;
+}
+#box-home #box-home-prompt input:not([type="checkbox"]) {
+  margin: .25em; padding: .5em 1em;
+  width: 75%; height: auto;
+  font-size: 100%;
+  border: none;
+  border-radius: 0;
+  /*border-bottom: 3px solid #CE4559 !important;*/
+  color: #5F5F5F;
+  background-color: #F2F2F2;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, .09);
+}
+#box-home #box-home-prompt input[type='checkbox'] {
+  width: 15px; height: 15px;
+  margin: 0; padding: 0;
+  vertical-align: middle;
+  position: relative;
+  bottom: 1px;
+}
+#box-home #box-home-prompt label, #box-home #box-home-prompt label a {
+  color: #333 !important;
+  width: calc(100% - 18px);
+  margin-left: 3px;
+}
+#box-home #box-home-prompt p {
+  margin: 3px;
+}
+#box-home-prompt a {
+  text-decoration: underline;
+}
+.mailcheck_suggestion {
+  display: none !important;
+}
+/* GAME */
+#box-game.box-panel {
+  height: calc(100% - 80px - 20px) !important;
+}
+#box #box-game .box-content {
+  height: 100% !important;
+}
+#box-game #box-game-panel {
+  background-image: none;
+  background-color: rgba(255, 255, 255, .15);
+  height: 100% !important; max-height: 500px !important;
+}
+#box-game #loading {
+  left: 0; top: 0; right: 0; bottom: 0;
+  transform: none;
+  background-color: #232323;
+}
+#box-game #loading div {
+  color: #333;
+  background-color: white;
+  border-radius: 2px;
+  font-size: 150%;
+  position: absolute;
+  top: 50%; left: 50%; bottom: auto; right: auto;
+  transform: translate(-50%, -50%);
+  width: 80%; max-width: 350px;
+  margin: 0 auto; padding: .5em;
+  text-transform: uppercase;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, .25);
+}
+#box-game-panel #hitbox {
+  top: 20%;
+}
+#box-game-panel #top_background {
+  height: 30px; line-height: 30px;
+  background-color: white;
+  opacity: 1 !important;
+  -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, .5);
+          box-shadow: 0 0 5px 0 rgba(0, 0, 0, .5);
+}
+#box-game-panel #score {
+  width: 100%;
+  top: 50%; transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 90%;
+  color: #333;
+}
+/*#box-game-panel #tuto, */#box-game-panel #fps {
+  display: none !important;
+}
+#box-game-panel #tuto {
+  z-index: 21;
+  background-color: rgba(255, 255, 255, .75);
+  border-radius: 7.5px;
+}
+#box-game-panel #tuto button {
+  position: absolute; top: 105%;
+  left: 0; right: 0; margin: 0 auto;
+}
+/* SHARE */
+#box-thanks .box-content, #box-share .box-content, #box-won .box-content, #box-lost .box-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.box-won-explanation, .box-lose-explanation {
+  display: none !important;
+  padding: 2% 12% 0 12% !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 125%; line-height: 110%;
+  background-color: #570000;
+}
+.box-share-message {
+  font-size: 115%; line-height: 100%;
+  padding: 0 10% .125em;
+}
+#share_title {
+  font-weight: 700;
+  font-size: 100%; line-height: 150%;
+}
+#share_description {
+  font-size: 75%; line-height: 110%;
+  font-style: italic;
+}
+#box-share-panel {
+  width: 100%;
+}
+.box-share-content.box-share-mode2 {
+  background-color: #570000;
+  width: 100%;
+  padding: 3% 0;
+}
+.cta {
+  margin: 0 auto;
+  position: absolute;
+  bottom: 7.5%; top: auto; left: 0; right: 0;
+  z-index: 9;
+}
+/* QUERIES */
+@media screen and (max-width: 450px){
+  #box .box-header h2 {
+    font-size: 95% !important;
+  }
+  #box-home #box-home-prompt p {
+    font-size: 80% !important; line-height: 110% !important;
+  }
+  #box-home #box-home-prompt input {
+    font-size: 80% !important;
+  }
+  #share_title {
+    font-size: 90%;
+  }
+  #share_description {
+    font-size: 75%;
+  }
+}
+@media screen and (max-width: 350px){
+  #box #box-logo {
+    height: 80px !important;
+  }
+  #box-home.box-panel, #box-game.box-panel, #box-refund-post.box-panel, #box-refund-contact.box-panel, #box-refund-rib.box-panel, #box-thanks.box-panel, #box-won.box-panel, #box-share.box-panel, #box-cannot.box-panel {
+    height: calc(100% - 80px - 20px) !important;
+  }
+  #box .box-header {
+    height: 80px !important;
+  }
+  #box-home-panel, #box-game .box-content, #box-refund-post .box-content, #box-refund-contact .box-content, #box-refund-rib .box-content, #box-thanks .box-content, #box-won .box-content, #box-share .box-content, #box-cannot .box-content {
+    height: calc(100% - 80px) !important;
+  }
+  #box .box-header h2 {
+    font-size: 80% !important;
+  }
+  #box-home #box-home-prompt p {
+    font-size: 70% !important;
+  }
+  #box-home #box-home-prompt input {
+    margin: 3px !important;
+    padding: 1px !important;
+    font-size: .7em !important;
+    width: 90% !important;
+  }
+  #box-home #box-home-prompt input[type='checkbox'] {
+    width: 10px !important; height: 10px !important;
+  }
+  #share_title {
+    font-size: 85%;
+  }
+  #share_description {
+    font-size: 70%;
+  }
+}
