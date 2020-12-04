@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="theme-color" content="#333333"/>
+  <meta name="msapplication-navbutton-color" content="#333333"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="#333333"/>
+
+  <title>A World of Cro • Ragnarök</title>
+  <meta name="author" content="MonsieurCro"/>
+  <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico"/>
+
+  <style>
+    * {
+      outline: none;
+      outline-color: transparent;
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+       -khtml-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+           -o-user-select: none;
+              user-select: none;
+      -webkit-user-drag: none;
+                user-drag: none;
+      -webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+              box-sizing: border-box;
+    }
+    button, input[type="button"], .button {
+      -webkit-appearance: none;
+         -moz-appearance: none;
+        -ms-appearance: none;
+      margin: 0; padding: 0;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+    html {
+      width: 100%; height: auto;
+      margin: 0; padding: 0;
+      overflow-y: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    html::-webkit-scrollbar {
+        width: 0; height: 0;
+        display: none;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #232323;
+      width: 100%; min-height: 100vh;
+      margin: 0; padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-transition: background-color .45s ease .09s;
+         -moz-transition: background-color .45s ease .09s;
+              transition: background-color .45s ease .09s;
+    }
+    #bg-image {
+      background-image: url(https://www.pixel4k.com/wp-content/uploads/2018/10/vikings-raven-4k_1540754969.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      opacity: .75;
+      filter: grayscale(100%);
+      overflow: hidden;
+      height: 104vh; width: 104vw;
+      position: fixed;
+      top: -2vh; left: -2vw; right: -2vw; bottom: -2vh;
+      z-index: -1;
+        -webkit-transition: background 4.5s ease-in-out;
+           -moz-transition: background 4.5s ease-in-out;
+                transition: background 4.5s ease-in-out;
+    }
+    #lcframe {
+      width: 100%; height: auto;
+      margin: .5em 0; padding: 0;
+      color: white;
+      background-color: transparent;
+      text-align: center;
+    }
+    footer {
+      background-color: rgba(0, 0, 0, .75);
+      color: #AAA;
+      text-align: center;
+      position: fixed;
+      left: 0; right: 0; bottom: 0; top: auto;
+      width: 100%; height: 2.5em; line-height: 2.5em;
+      font-size: 65%;
+    }
+    footer a {
+      color: #CCC;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="bg-image"></div>
+
+  <div id="lcframe">
+    <h2>Chargement…</h2>
+    <p>Si rien ne se passe, merci de ne pas pleurer et d'essayer sur un autre navigateur&nbsp;!</p>
+  </div>
+
+  <script>
+    var OP_ID = '8ecc5b3a5ffb3c787bec660f84ef9d0d';
+    var POKE_ID = Date.now();
+
+    try {
+      if(localStorage.getItem('poke_id') && localStorage.getItem('poke_id') != 'null'){
+        POKE_ID = localStorage.getItem('poke_id');
+      };
+    } catch(event) { console.log(event); };
+
+    // IE fix
+    if(typeof Object.assign !== "function"){
+      Object.defineProperty(Object, "assign",{
+        value: function assign(target, varArgs){
+          "use strict";
+          if(target === null || target === undefined){
+            throw new TypeError("Cannot convert undefined or null to object");
+          };
+          var to = Object(target);
+          for(var index = 1; index < arguments.length; index++){
+            var nextSource = arguments[index];
+            if(nextSource !== null && nextSource !== undefined){
+              for(var nextKey in nextSource){
+                if(Object.prototype.hasOwnProperty.call(nextSource, nextKey)){
+                  to[nextKey] = nextSource[nextKey];
+                };
+              };
+            };
+          };
+          return to;
+        },
+        writable: true,
+        configurable: true
+      });
+    };
+
+    function poke(OP_ID, POKE_ID){
+      window._lcdata = Object.assign({
+        item_uid : POKE_ID,
+        user_uid : POKE_ID,
+        language : 'fr',
+        item_value : 1
+      });
+      var _frf = document.createElement('script');
+      _frf.setAttribute('type', 'text/javascript');
+      _frf.setAttribute('src', 'https://www.luckycycle.com/client/fjs/' + OP_ID + '.js');
+      _frf.async = !0;
+      document.getElementsByTagName('head')[0].appendChild(_frf);
+
+      try {
+        localStorage.setItem('poke_id', POKE_ID);
+      } catch(event) { console.log(event); };
+    };
+    poke(OP_ID, POKE_ID);
+  </script>
+
+  <footer>Made with <span style="color:#EC0000;">❤</span> by <a href="https://www.dealabs.com/profile/MonsieurCro/overview" target="_blank">MonsieurCro</a></footer>
+</body>
+</html>
