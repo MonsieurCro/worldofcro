@@ -13,8 +13,8 @@
     "game_box_question_confirm": "Confirmer votre réponse ?",
     "game_box_ok": "Confirmer",
     "game_box_cancel": "Annuler",
-    "game_box_wrong_answer": "Désolé, mais tu as déjà participé !",
-    "game_box_cannot_play": "Désolé, mais tu ne peux pas jouer à ce jeu.",
+    "game_box_wrong_answer": "Désolé, mais tu as déjà joué !",
+    "game_box_cannot_play": "Désolé, mais tu ne peux pas jouer.",
     "game_box_just_won": "Seulement [[score]] mètres ? Où était le challenge ?",
     "game_box_just_won_reward": "Félicitations! Vous avez gagné ",
     "game_box_just_won_reward_2": "!",
@@ -28,14 +28,14 @@
     "game_box_conditions": "Conditions Générales",
     "game_box_no_javascript": "Javascript doit être activé pour lancer le jeu.",
     "game_expired": "Désolé, mais le jeu n'est plus disponible.",
-    "already_wrong": "Désolé, mais tu as déjà participé !",
-    "cannot_play": "Désolé, mais tu ne peux pas jouer à ce jeu.",
-    "already_won": "Désolé, mais tu as déjà participé !",
-    "already_lost": "Désolé, mais tu as déjà participé !",
+    "already_wrong": "Désolé, mais tu as déjà joué !",
+    "cannot_play": "Désolé, mais tu ne peux pas jouer.",
+    "already_won": "Désolé, mais tu as déjà joué !",
+    "already_lost": "Désolé, mais tu as déjà joué !",
     "terms_and_conditions": "Conditions Générales",
     "terms_and_conditions_url": "{{tc}}",
     "game_box_error_title": "Oups ! Petit problème technique...",
     "game_box_error_message": "N'hésite pas à m'envoyer un petit message !",
-    "game_box_cancelled": "Désolé, mais tu ne peux pas jouer à ce jeu."
+    "game_box_cancelled": "Désolé, mais tu ne peux pas jouer."
   }
 }

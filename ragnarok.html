@@ -113,11 +113,11 @@
     var OP_ID = '8ecc5b3a5ffb3c787bec660f84ef9d0d';
     var POKE_ID = Date.now();
 
-    try {
-      if(localStorage.getItem('poke_id') && localStorage.getItem('poke_id') != 'null'){
-        POKE_ID = localStorage.getItem('poke_id');
-      };
-    } catch(event) { console.log(event); };
+    // try {
+    //   if(localStorage.getItem('poke_id') && localStorage.getItem('poke_id') != 'null'){
+    //     POKE_ID = localStorage.getItem('poke_id');
+    //   };
+    // } catch(event) { console.log(event); };
 
     // IE fix
     if(typeof Object.assign !== "function"){
@@ -158,9 +158,9 @@
       _frf.async = !0;
       document.getElementsByTagName('head')[0].appendChild(_frf);
 
-      try {
-        localStorage.setItem('poke_id', POKE_ID);
-      } catch(event) { console.log(event); };
+      // try {
+      //   localStorage.setItem('poke_id', POKE_ID);
+      // } catch(event) { console.log(event); };
     };
     poke(OP_ID, POKE_ID);
   </script>
