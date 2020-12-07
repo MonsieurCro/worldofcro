@@ -233,12 +233,12 @@ button:hover, input[type="button"]:hover, .button:hover, #box-button-home:hover 
   left: 0; right: 0; margin: 0 auto;
 }
 /* SHARE */
-#box-thanks .box-content, #box-share .box-content, #box-won .box-content, #box-lost .box-content {
+/*#box-thanks .box-content, #box-share .box-content, #box-won .box-content, #box-lost .box-content {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-}
+}*/
 .box-won-explanation, .box-lose-explanation {
   display: none !important;
   padding: 2% 12% 0 12% !important;
@@ -267,11 +267,25 @@ button:hover, input[type="button"]:hover, .button:hover, #box-button-home:hover 
   width: 100%;
   padding: 3% 0;
 }
+.cta_text {
+  text-align: center;
+  position: absolute;
+  bottom: calc(10% + (2em + .5em + 2em + .5em) * (125/100)); top: auto; left: 0; right: 0;
+  margin: 0 auto;
+  width: 80%;
+  color: white !important;
+  font-size: 100% !important;
+  font-style: italic;
+}
 .cta {
   margin: 0 auto;
   position: absolute;
   bottom: 7.5%; top: auto; left: 0; right: 0;
   z-index: 9;
+}
+#retry {
+  bottom: calc(10% + 2em + .5em);
+  text-transform: uppercase;
 }
 /* QUERIES */
 @media screen and (max-width: 450px){

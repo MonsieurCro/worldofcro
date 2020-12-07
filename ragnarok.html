@@ -163,6 +163,14 @@
       // } catch(event) { console.log(event); };
     };
     poke(OP_ID, POKE_ID);
+
+    window.addEventListener('message', function(){
+      //if(!!!~event.origin.indexOf('luckycycle.com')){ return; }
+      if(event.data && event.data == 'RELOAD_GAME'){
+      	POKE_ID = Date.now();
+        poke(OP_ID, POKE_ID);
+      };
+    }, false);
   </script>
 
   <footer>Made with <span style="color:#EC0000;">❤</span> by <a href="https://www.dealabs.com/profile/MonsieurCro/overview" target="_blank">MonsieurCro</a></footer>
