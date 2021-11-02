@@ -13,10 +13,8 @@
   <link rel="shortcut icon" type="image/png" href="./assets/favicon.png">
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap"> -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
 
-  <!-- <link rel="stylesheet" href="./styles.css"> -->
   <style>
     /*Common*/
     * {
@@ -79,6 +77,7 @@
     }
     .hidden {
       opacity: 0 !important;
+      z-index: -1 !important;
       transition: all .3s ease;
     }
     @media screen and (max-width: 900px){
@@ -116,15 +115,30 @@
     #start > h1 > span {
       padding: 0 .25em;
     }
-    #counter {
+    #header {
       position: fixed;
       z-index: 1;
-      top: 1em; right: 1em; bottom: auto; left: auto;
+      top: 1em; left: 1em; right: 1em; bottom: auto;
+      text-align: right;
+    }
+    #header > .info {
+      display: inline-block;
       padding: .125em .75em;
       background-color: rgb(204, 97, 0);
       border-radius: .175em;
       border-top: .25em solid rgb(179, 85, 0);
       border-bottom: .25em solid rgb(179, 85, 0);
+    }
+    #header > .button {
+      float: left;
+      padding: .375em .75em;
+      color: #833DC4; background-color: white;
+      border-radius: .175em;
+      cursor: pointer;
+      transition: all .3s ease;
+    }
+    #header > .button:hover {
+      color: white; background-color: #833DC4;
     }
     .renne {
       position: absolute;
@@ -133,6 +147,18 @@
       min-width: 2.5em !important; min-height: 2.5em !important;
       max-width: 10em !important; max-height: 10em !important;
       cursor: pointer;
+    }
+    #result {
+      position: fixed;
+      z-index: 2;
+      top: 0; left: 0; bottom: 0; right: 0;
+      width: 100%; height: 100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, .5);
     }
     footer {
       position: fixed;
@@ -168,19 +194,22 @@
     <h1><img src="./assets/fancyline-left.svg" alt="" title=""><span>Démarrer&nbsp;?</span><img src="./assets/fancyline-right.svg" alt="" title=""></h1>
   </div>
 
-  <div id="counter" class="hidden"><span>0</span>&nbsp;pts</div>
+  <nav id="header">
+    <div id="mode" class="button hidden">Chargement…</div>
+    <div id="timer" class="info hidden"><span>0</span>&nbsp;s</div>
+    <div id="score" class="info hidden"><span>0</span>&nbsp;pts</div>
+  </nav>
+
+  <div id="result" class="hidden">
+    <h1>Félicitations,<br>vous avez capturé<br><span style="color:#FF7900;"></span> rennes&nbsp;!</h1>
+    <!-- <div id="retry" class="button">Réessayer</div> -->
+  </div>
 
   <footer>
     <img src="./assets/fancy-divider.svg" alt="" title="">
-    <a href="https://www.dealabs.com/profile/MonsieurCro" target="_blank"><p>MonsieurCro 2021</p></a>
+    <a href="https://www.dealabs.com/profile/MonsieurCro" target="_blank"><p>MonsieurCro&nbsp;2021</p></a>
   </footer>
 
-  <!-- <script type="text/javascript">
-    if (window.navigator.userAgent.indexOf("MSIE ") > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
-      document.querySelector(body).innerHTML = 'Sorry, but this browser isn\'t supported.';
-    };
-  </script> -->
-  <!-- <script type="text/javascript" charset="utf-8" src="./scripts.js"></script> -->
   <script type="text/javascript">
     // List our items
     const troupeauRennes = [
@@ -200,10 +229,12 @@
       "./assets/vampire-level2_4f880.svg",
       "./assets/witch-level1_7d1d1.svg",
       "./assets/witch-level2_59b65.svg"
-    ]
+    ];
 
     // Create our counter
     var score = 0;
+    var timer = 30;
+    var challenge = false;
 
     // Generate a target
     function nouvelleCible() {
@@ -214,14 +245,14 @@
       renne.posY = Math.floor(Math.random() * ($(document).height() - renne.taille));
       //console.log(renne);
 
-      $('body').append('<img class="renne" id="renne-' + score + '" src="' + renne.type +'" style="width:' + renne.taille + 'px;left:' + renne.posX + 'px;top:' + renne.posY + 'px;">').fadeIn(500);
+      $('body').append('<img class="renne" id="renne-' + score + '" src="' + renne.type + '" style="width:' + renne.taille + 'px;left:' + renne.posX + 'px;top:' + renne.posY + 'px;">').fadeIn(500);
     };
 
     // Target eleminated
     $(document).on('click', '.renne', function(){
       $(this).remove();
       score++;
-      $('#counter > span').text(score);
+      $('#score > span').text(score);
       nouvelleCible();
     });
 
@@ -230,17 +261,46 @@
       $(this).find('span').html('Bonne&nbsp;chasse&nbsp;!');
       setTimeout(function() {
         $('#start').fadeOut('slow', function() { $(this).remove(); });
-        $('#counter').removeClass('hidden');
+        $('#mode').html(challenge ? 'Zen&nbsp;Mode' : 'Challenge&nbsp;Mode');
+        $('#score > span').text(score);
+        $('#mode, #score').removeClass('hidden');
 
         // NoOutOfBoundTarget
         $(window).on('resize orientationchange', function() {
-          $('#renne-' + score).remove();
+          $('.renne').remove();
           nouvelleCible();
         });
 
         nouvelleCible();
       }, 2500);
-    })
+    });
+
+    // Start challenge mode - very dirty
+    $('#mode').click(function() {
+      score = 0;
+      timer = 30;
+      challenge = !challenge;
+
+      $('#mode').html(challenge ? 'Zen&nbsp;Mode' : 'Challenge&nbsp;Mode');
+      $('#score > span').text(score);
+      $('#timer').addClass('hidden');
+
+      if (challenge) {
+        $('#timer > span').text(timer);
+        $('#timer').removeClass('hidden');
+
+        var countdown = setInterval(function() {
+          timer--;
+          $('#timer > span').text(timer);
+          if (timer == 0) {
+            clearInterval(countdown);
+            $('.renne').remove();
+            $('#result > h1 > span').text(score);
+            $('#result').removeClass('hidden');
+          }
+        }, 1000);
+      };
+    });
   </script>
 </body>
 </html>
