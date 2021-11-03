@@ -59,7 +59,7 @@
       background-color: #261A30;
     }
     h1, h2, h3, h4, h5, h6, p {
-      margin: .5em auto;
+      margin: .125em auto;
     }
     span, a {
       color: inherit;
@@ -82,7 +82,7 @@
     }
     @media screen and (max-width: 900px){
       html {
-        font-size: 2.25vw;
+        font-size: 2vw;
       }
     }
     @media screen and (max-width: 600px){
@@ -108,11 +108,11 @@
       max-width: 75%; max-height: 50%;
       cursor: pointer;
     }
-    #start > h1 > img {
+    h1 > img {
       height: .75em;
       opacity: .75;
     }
-    #start > h1 > span {
+    h1 > span {
       padding: 0 .25em;
     }
     #header {
@@ -124,20 +124,22 @@
     #header > .info {
       display: inline-block;
       padding: .125em .75em;
-      background-color: rgb(204, 97, 0);
+      background-color: #FF7900;
       border-radius: .175em;
-      border-top: .25em solid rgb(179, 85, 0);
-      border-bottom: .25em solid rgb(179, 85, 0);
+      border-top: .25em solid rgb(204, 97, 0);
+      border-bottom: .25em solid rgb(204, 97, 0);
     }
     #header > .button {
       float: left;
+    }
+    .button {
       padding: .375em .75em;
       color: #833DC4; background-color: white;
       border-radius: .175em;
       cursor: pointer;
       transition: all .3s ease;
     }
-    #header > .button:hover {
+    .button:hover {
       color: white; background-color: #833DC4;
     }
     .renne {
@@ -158,7 +160,43 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background-color: rgba(0, 0, 0, .5);
+      background-color: rgba(0, 0, 0, .75);
+    }
+    .card {
+      width: 10em; height: 12em;
+      color: #833DC4; background-color: white;
+      border: .075em solid white;
+      border-radius: .175em;
+      /*box-shadow: 0 2px 4px 0 rgb(0, 0, 0, .3), inset 0 -4px 16px -12px rgb(0, 0, 0, .5);*/
+      overflow: hidden;
+      text-align: center;
+      margin: 1em auto;
+    }
+    .card > .content {
+      position: relative;
+      background-color: #E9EAED;
+      /*background: linear-gradient(135deg, #dae7ec, #a0afb4 53%, #dae7ec);*/
+      width: 100%; height: calc(100% - 2.15em);
+      overflow: hidden;
+    }
+    .card > .content > img {
+      width: auto; height: auto;
+      max-width: 75%; max-height: 100%;
+      transform: translateY(2.5%);
+    }
+    .card > .content > .bubble {
+      position: absolute;
+      top: .5em; left: .5em; bottom: auto; right: auto;
+      width: 1.75em; height: 1.75em;
+      text-align: center; line-height: 1.75em;
+      border-radius: 50%;
+      color: white; background-color: #35373B;
+      font-size: .85em;
+    }
+    .card > .text {
+      color: #A0AFB4;
+      padding: .5em .125em;
+      line-height: 1.15em;
     }
     footer {
       position: fixed;
@@ -189,20 +227,29 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div id="start">
-    <img class="pulse" src="./assets/logo_d1183.svg" alt="CHASSE AUX RENNES" title="">
-    <h1><img src="./assets/fancyline-left.svg" alt="" title=""><span>Démarrer&nbsp;?</span><img src="./assets/fancyline-right.svg" alt="" title=""></h1>
-  </div>
-
   <nav id="header">
     <div id="mode" class="button hidden">Chargement…</div>
     <div id="timer" class="info hidden"><span>0</span>&nbsp;s</div>
     <div id="score" class="info hidden"><span>0</span>&nbsp;pts</div>
   </nav>
 
+  <div id="start">
+    <img class="pulse" src="./assets/logo_d1183.svg" alt="CHASSE AUX RENNES" title="">
+    <h1><img src="./assets/fancyline-left.svg" alt="" title=""><span>Démarrer&nbsp;?</span><img src="./assets/fancyline-right.svg" alt="" title=""></h1>
+  </div>
+
   <div id="result" class="hidden">
-    <h1>Félicitations,<br>vous avez capturé<br><span style="color:#FF7900;"></span> rennes&nbsp;!</h1>
-    <!-- <div id="retry" class="button">Réessayer</div> -->
+    <h1><img src="./assets/fancyline-left.svg" alt="" title=""><span>La chasse est terminée&nbsp;!</span><img src="./assets/fancyline-right.svg" alt="" title=""></h1>
+
+    <div class="card">
+      <div class="content">
+        <img src="./assets/witch-level2_59b65.svg" alt="" title="">
+        <div class="bubble">0</div>
+      </div>
+      <div class="text">…</div>
+    </div>
+
+    <div id="retry" class="button">Réessayer&nbsp;?</div>
   </div>
 
   <footer>
@@ -211,7 +258,7 @@
   </footer>
 
   <script type="text/javascript">
-    // List our items
+    // Items
     const troupeauRennes = [
       "./assets/chainsaw-level1_6436e.svg",
       "./assets/chainsaw-level2_42719.svg",
@@ -231,75 +278,100 @@
       "./assets/witch-level2_59b65.svg"
     ];
 
-    // Create our counter
+    // Variables
     var score = 0;
     var timer = 30;
     var challenge = false;
+    var countdown = null;
 
-    // Generate a target
+    $('#score > span').text(score);
+    $('#timer > span').text(timer);
+    $('#mode').html(challenge ? 'Zen&nbsp;Mode' : 'Challenge&nbsp;Mode');
+
+    // Functions
+    function updateScore() {
+      score++;
+      $('#score > span').text(score);
+    };
+    function resetGame() {
+      clearInterval(countdown);
+      $('.renne').remove();
+
+      score = 0;
+      timer = 30;
+
+      $('#score > span').text(score);
+      $('#timer').addClass('hidden').children('span').text(timer);
+      $('#mode').html(challenge ? 'Zen&nbsp;Mode' : 'Challenge&nbsp;Mode');
+
+      // Challenge Mode
+      if (challenge) {
+        $('#timer').removeClass('hidden');
+        let left = timer;
+        countdown = setInterval(function() {
+          left > 0 ? left-- : 0;
+
+          if (left <= 0) {
+            clearInterval(countdown);
+            $('#timer').addClass('hidden');
+            $('.renne').remove();
+            $('.card > .content > .bubble').text(score);
+            $('.card > .content > img').attr('src', troupeauRennes[Math.floor(Math.random() * troupeauRennes.length)]);
+            $('.card > .text').html(score == 1 ? 'Renne&nbsp;capturé' : 'Rennes&nbsp;capturés');
+            $('#result').removeClass('hidden');
+          } else {
+            $('#timer > span').text(left);
+          }
+        }, 1000);
+      };
+
+      nouvelleCible();
+    };
+
+    // GenerateTarget
     function nouvelleCible() {
-      var renne = {}
+      let renne = {}
       renne.type = troupeauRennes[Math.floor(Math.random() * troupeauRennes.length)];
       renne.taille = Math.floor((Math.random() * 100) + 50);
       renne.posX = Math.floor(Math.random() * ($(document).width() - renne.taille));
       renne.posY = Math.floor(Math.random() * ($(document).height() - renne.taille));
-      //console.log(renne);
 
-      $('body').append('<img class="renne" id="renne-' + score + '" src="' + renne.type + '" style="width:' + renne.taille + 'px;left:' + renne.posX + 'px;top:' + renne.posY + 'px;">').fadeIn(500);
+      $('body').append('<img id="renne-' + score + '" class="renne" src="' + renne.type + '" style="width:' + renne.taille + 'px;left:' + renne.posX + 'px;top:' + renne.posY + 'px;">').fadeIn(500);
+
+      // TargetEliminated
+      $('#renne-' + score).click(function() {
+        $(this).remove();
+        updateScore();
+        nouvelleCible();
+      });
+
+      // NoOutOfBoundTarget
+      // $(window).on('resize orientationchange', function() {
+      //   $('#renne-' + score).remove();
+      //   nouvelleCible();
+      // });
     };
-
-    // Target eleminated
-    $(document).on('click', '.renne', function(){
-      $(this).remove();
-      score++;
-      $('#score > span').text(score);
-      nouvelleCible();
-    });
 
     // Let's go
     $('#start').click(function() {
       $(this).find('span').html('Bonne&nbsp;chasse&nbsp;!');
       setTimeout(function() {
-        $('#start').fadeOut('slow', function() { $(this).remove(); });
-        $('#mode').html(challenge ? 'Zen&nbsp;Mode' : 'Challenge&nbsp;Mode');
-        $('#score > span').text(score);
-        $('#mode, #score').removeClass('hidden');
-
-        // NoOutOfBoundTarget
-        $(window).on('resize orientationchange', function() {
-          $('.renne').remove();
+        $('#start').fadeOut('slow', function() {
+          $(this).remove();
+          $('#mode, #score').removeClass('hidden');
           nouvelleCible();
         });
-
-        nouvelleCible();
       }, 2500);
     });
-
-    // Start challenge mode - very dirty
+    // Switch mode
     $('#mode').click(function() {
-      score = 0;
-      timer = 30;
       challenge = !challenge;
-
-      $('#mode').html(challenge ? 'Zen&nbsp;Mode' : 'Challenge&nbsp;Mode');
-      $('#score > span').text(score);
-      $('#timer').addClass('hidden');
-
-      if (challenge) {
-        $('#timer > span').text(timer);
-        $('#timer').removeClass('hidden');
-
-        var countdown = setInterval(function() {
-          timer--;
-          $('#timer > span').text(timer);
-          if (timer == 0) {
-            clearInterval(countdown);
-            $('.renne').remove();
-            $('#result > h1 > span').text(score);
-            $('#result').removeClass('hidden');
-          }
-        }, 1000);
-      };
+      resetGame();
+    });
+    // Replay
+    $('#retry').click(function() {
+      $('#result').addClass('hidden');
+      resetGame();
     });
   </script>
 </body>
