@@ -59,7 +59,7 @@
       background-color: #261A30;
     }
     h1, h2, h3, h4, h5, h6, p {
-      margin: .125em auto;
+      margin: .25em auto;
     }
     span, a {
       color: inherit;
@@ -213,6 +213,9 @@
       justify-content: center;
       align-items: center;
       font-size: .75em;
+    }
+    footer > img {
+      height: 3.5em;
     }
     /*Keyframes*/
     .grow {
@@ -372,11 +375,16 @@
 
     // GenerateTarget
     function nouvelleCible() {
+      let em = parseFloat($('html').css('font-size'));
       let renne = {}
+
       renne.type = troupeauRennes[Math.floor(Math.random() * troupeauRennes.length)];
-      renne.taille = Math.floor((Math.random() * 100) + 50);
+      renne.taille = Math.floor((Math.random() * 10 * em) + em);
+      renne.taille >= $(document).width() ? $(document).width() / 5 : renne.taille;
       renne.posX = Math.floor(Math.random() * ($(document).width() - renne.taille));
       renne.posY = Math.floor(Math.random() * ($(document).height() - renne.taille));
+      renne.posX < 0 ? 0 : renne.posX; renne.posX > $(document).width() ? $(document).width() - (renne.taille / 2) : renne.posX;
+      renne.posY < 0 ? 0 : renne.posY; renne.posY > $(document).height() ? $(document).height() - (renne.taille / 2) : renne.posY;
 
       $('body').append('<img id="renne-' + score + '" class="renne" src="' + renne.type + '" style="width:' + renne.taille + 'px;left:' + renne.posX + 'px;top:' + renne.posY + 'px;">').fadeIn(500);
 
@@ -386,12 +394,6 @@
         updateScore();
         nouvelleCible();
       });
-
-      // NoOutOfBoundTarget
-      // $(window).on('resize orientationchange', function() {
-      //   $('#renne-' + score).remove();
-      //   nouvelleCible();
-      // });
     };
 
     // Let's go
@@ -413,6 +415,14 @@
     // Replay
     $('#retry').click(function() {
       resetGame();
+    });
+
+    // NoOutOfBoundTarget
+    $(window).on('resize orientationchange', function() {
+      if ($('.renne').length > 0) {
+        $('.renne').remove();
+        nouvelleCible();
+      };
     });
   </script>
 </body>
