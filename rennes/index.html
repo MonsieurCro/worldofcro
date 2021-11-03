@@ -148,8 +148,8 @@
       position: absolute;
       z-index: 5;
       width: auto; height: auto;
-      min-width: 2.5em !important; min-height: 2.5em !important;
-      max-width: 10em !important; max-height: 10em !important;
+      min-width: 3.5em !important; min-height: 3.5em !important;
+      max-width: 12.5em !important; max-height: 12.5em !important;
       cursor: pointer;
     }
     #delay {
@@ -379,12 +379,10 @@
       let renne = {}
 
       renne.type = troupeauRennes[Math.floor(Math.random() * troupeauRennes.length)];
-      renne.taille = Math.floor((Math.random() * 10 * em) + em);
-      renne.taille >= $(document).width() ? $(document).width() / 5 : renne.taille;
+      renne.taille = Math.floor((Math.random() * em * 9) + em);
+      renne.taille >= $(document).width() / 4 ? $(document).width() / 4 : renne.taille;
       renne.posX = Math.floor(Math.random() * ($(document).width() - renne.taille));
       renne.posY = Math.floor(Math.random() * ($(document).height() - renne.taille));
-      renne.posX < 0 ? 0 : renne.posX; renne.posX > $(document).width() ? $(document).width() - (renne.taille / 2) : renne.posX;
-      renne.posY < 0 ? 0 : renne.posY; renne.posY > $(document).height() ? $(document).height() - (renne.taille / 2) : renne.posY;
 
       $('body').append('<img id="renne-' + score + '" class="renne" src="' + renne.type + '" style="width:' + renne.taille + 'px;left:' + renne.posX + 'px;top:' + renne.posY + 'px;">').fadeIn(500);
 
