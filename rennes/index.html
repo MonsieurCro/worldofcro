@@ -91,7 +91,7 @@
       }
     }
     /*Custom*/
-    #start {
+    .modal {
       position: fixed;
       z-index: 2;
       top: 0; left: 0; bottom: 0; right: 0;
@@ -101,12 +101,14 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background-color: rgba(0, 0, 0, .5);
     }
-    #start > * {
+    #start {
+      background-color: rgba(0, 0, 0, .5);
+      cursor: pointer;
+    }
+    #start > img {
       width: auto; height: auto;
       max-width: 75%; max-height: 50%;
-      cursor: pointer;
     }
     h1 > img {
       height: .75em;
@@ -150,16 +152,17 @@
       max-width: 10em !important; max-height: 10em !important;
       cursor: pointer;
     }
+    #delay {
+      background-color: rgba(0, 0, 0, .5);
+    }
+    #delay > h2 {
+      display: inline-block;
+      width: 1.5em; height: 1.5em;
+      text-align: center; line-height: 1.5em;
+      border-radius: 50%;
+      font-size: 4.5em;
+    }
     #result {
-      position: fixed;
-      z-index: 2;
-      top: 0; left: 0; bottom: 0; right: 0;
-      width: 100%; height: 100%;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       background-color: rgba(0, 0, 0, .75);
     }
     .card {
@@ -210,17 +213,29 @@
       font-size: .75em;
     }
     /*Keyframes*/
-    .pulse {
-      -webkit-animation: pulse ease-out 2.5s infinite;
-      animation: pulse ease-out 2.5s infinite;
+    .grow {
+      -webkit-animation: grow ease 2s infinite;
+      animation: grow ease 2s infinite;
     }
-    @-webkit-keyframes pulse {
+    @-webkit-keyframes grow {
       50% { -webkit-transform: scale(1.05, 1.05); }
       100% { -webkit-transform: scale(1, 1); }
     }
-    @keyframes pulse {
+    @keyframes grow {
       50% { transform: scale(1.05, 1.05); }
       100% { transform: scale(1, 1); }
+    }
+    .pulse {
+      -webkit-animation: pulse ease-in .5s normal;
+      animation: pulse ease-in .5s normal;
+    }
+    @-webkit-keyframes pulse {
+      0%, 50% { -webkit-transform: none; }
+      20% { -webkit-transform: scale(1.25); }
+    }
+    @keyframes pulse {
+      0%, 50% { transform: none; }
+      20% { transform: scale(1.25); }
     }
   </style>
 
@@ -233,13 +248,15 @@
     <div id="score" class="info hidden"><span>0</span>&nbsp;pts</div>
   </nav>
 
-  <div id="start">
-    <img class="pulse" src="./assets/logo_d1183.svg" alt="CHASSE AUX RENNES" title="">
-    <h1><img src="./assets/fancyline-left.svg" alt="" title=""><span>Démarrer&nbsp;?</span><img src="./assets/fancyline-right.svg" alt="" title=""></h1>
+  <div id="start" class="modal">
+    <img class="grow" src="./assets/logo_d1183.svg" alt="CHASSE AUX RENNES" title="">
+    <h1><img src="./assets/fancyline-left.svg" alt="" title=""><span>Cliquez&nbsp;pour&nbsp;démarrer</span><img src="./assets/fancyline-right.svg" alt="" title=""></h1>
   </div>
 
-  <div id="result" class="hidden">
-    <h1><img src="./assets/fancyline-left.svg" alt="" title=""><span>La chasse est terminée&nbsp;!</span><img src="./assets/fancyline-right.svg" alt="" title=""></h1>
+  <div id="delay" class="modal hidden"><h2>Chargement…</h2></div>
+
+  <div id="result" class="modal hidden">
+    <h1><img src="./assets/fancyline-left.svg" alt="" title=""><span>La&nbsp;chasse est&nbsp;terminée&nbsp;!</span><img src="./assets/fancyline-right.svg" alt="" title=""></h1>
 
     <div class="card">
       <div class="content">
@@ -282,11 +299,14 @@
     var score = 0;
     var timer = 30;
     var challenge = false;
+    var delay = 3;
+    var loading = null;
     var countdown = null;
 
     $('#score > span').text(score);
     $('#timer > span').text(timer);
     $('#mode').html(challenge ? 'Zen&nbsp;Mode' : 'Challenge&nbsp;Mode');
+    $('#delay > h2').text(delay);
 
     // Functions
     function updateScore() {
@@ -294,6 +314,7 @@
       $('#score > span').text(score);
     };
     function resetGame() {
+      clearInterval(loading);
       clearInterval(countdown);
       $('.renne').remove();
 
@@ -303,29 +324,47 @@
       $('#score > span').text(score);
       $('#timer').addClass('hidden').children('span').text(timer);
       $('#mode').html(challenge ? 'Zen&nbsp;Mode' : 'Challenge&nbsp;Mode');
+      $('#delay > h2').text(delay).removeClass('pulse');
 
       // Challenge Mode
       if (challenge) {
-        $('#timer').removeClass('hidden');
-        let left = timer;
-        countdown = setInterval(function() {
-          left > 0 ? left-- : 0;
+        $('#delay').removeClass('hidden');
+        $('#delay > h2').addClass('pulse').one('animationend webkitAnimationEnd oAnimationEnd', function() { $(this).removeClass('pulse'); });
 
-          if (left <= 0) {
-            clearInterval(countdown);
-            $('#timer').addClass('hidden');
-            $('.renne').remove();
-            $('.card > .content > .bubble').text(score);
-            $('.card > .content > img').attr('src', troupeauRennes[Math.floor(Math.random() * troupeauRennes.length)]);
-            $('.card > .text').html(score == 1 ? 'Renne&nbsp;capturé' : 'Rennes&nbsp;capturés');
-            $('#result').removeClass('hidden');
+        let load = delay;
+        loading = setInterval(function() {
+          load > 0 ? load-- : 0;
+
+          if (load <= 0) {
+            clearInterval(loading);
+            $('#delay').addClass('hidden');
+
+            nouvelleCible();
+            $('#timer').removeClass('hidden');
+
+            let left = timer;
+            countdown = setInterval(function() {
+              left > 0 ? left-- : 0;
+
+              if (left <= 0) {
+                clearInterval(countdown);
+                $('#timer').addClass('hidden');
+                $('.renne').remove();
+                $('.card > .content > .bubble').text(score);
+                $('.card > .content > img').attr('src', troupeauRennes[Math.floor(Math.random() * troupeauRennes.length)]);
+                $('.card > .text').html(score == 1 ? 'Renne&nbsp;capturé' : 'Rennes&nbsp;capturés');
+                $('#result').removeClass('hidden');
+              } else {
+                $('#timer > span').text(left);
+              }
+            }, 1000);
           } else {
-            $('#timer > span').text(left);
-          }
-        }, 1000);
+            $('#delay > h2').text(load).addClass('pulse').one('animationend webkitAnimationEnd oAnimationEnd', function() { $(this).removeClass('pulse'); });
+          };
+        }, 1500);
+      } else {
+        nouvelleCible();
       };
-
-      nouvelleCible();
     };
 
     // GenerateTarget
@@ -361,7 +400,7 @@
           $('#mode, #score').removeClass('hidden');
           nouvelleCible();
         });
-      }, 2500);
+      }, 1500);
     });
     // Switch mode
     $('#mode').click(function() {
