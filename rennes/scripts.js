@@ -32,7 +32,7 @@ $(document).ready(function() {
   $('#score > span').text(score);
   $('#timer > span').text(timer);
   $('#mode').html(challenge ? 'Zen&nbsp;Mode' : 'Challenge&nbsp;Mode');
-  $('#delay > h2').text(delay);
+  $('#delay > h3').text(delay);
 
   // Functions
   function startGame() {
@@ -40,7 +40,12 @@ $(document).ready(function() {
       $('#start').fadeOut(1000, function() {
         $(this).remove();
         $('#mode, #score').removeClass('hidden');
-        newTarget();
+
+        if (challenge) {
+          challengeMode();
+        } else {
+          newTarget();
+        };
       });
     }, 1500);
   };
@@ -53,47 +58,13 @@ $(document).ready(function() {
     timer = 30;
 
     $('#score > span').text(score);
-    $('#timer').addClass('hidden').children('span').text(timer);
+    $('#timer').addClass('hidden').one('transitionend webkitTransitionEnd oTransitionEnd', function() { $(this).children('span').text(timer); });
     $('#mode').html(challenge ? 'Zen&nbsp;Mode' : 'Challenge&nbsp;Mode');
-    $('#delay').addClass('hidden').children('h2').text(delay).removeClass('beat');
+    $('#delay').addClass('hidden').one('transitionend webkitTransitionEnd oTransitionEnd', function() { $(this).children('h3').text(delay).removeClass('beat'); });
     $('#result').addClass('hidden');
 
-    // Challenge Mode
     if (challenge) {
-      $('#delay').removeClass('hidden');
-      $('#delay > h2').addClass('beat').one('animationend webkitAnimationEnd oAnimationEnd', function() { $(this).removeClass('beat'); });
-
-      let load = delay;
-      loading = setInterval(function() {
-        load > 0 ? load-- : 0;
-
-        if (load <= 0) {
-          clearInterval(loading);
-          $('#delay').addClass('hidden');
-
-          newTarget();
-          $('#timer').removeClass('hidden');
-
-          let left = timer;
-          countdown = setInterval(function() {
-            left > 0 ? left-- : 0;
-
-            if (left <= 0) {
-              clearInterval(countdown);
-              $('#timer').addClass('hidden');
-              $('.renne').remove();
-              $('.card > .content > .bubble').text(score);
-              $('.card > .content > img').attr('src', troupeauRennes[Math.floor(Math.random() * troupeauRennes.length)]);
-              $('.card > .text').html(score == 1 ? 'Renne&nbsp;capturé' : 'Rennes&nbsp;capturés');
-              $('#result').removeClass('hidden');
-            } else {
-              $('#timer > span').text(left);
-            }
-          }, 1000);
-        } else {
-          $('#delay > h2').text(load).addClass('beat').one('animationend webkitAnimationEnd oAnimationEnd', function() { $(this).removeClass('beat'); });
-        };
-      }, 1500);
+      challengeMode();
     } else {
       newTarget();
     };
@@ -121,19 +92,57 @@ $(document).ready(function() {
       newTarget();
     });
   };
+  function challengeMode() {
+    $('#delay').removeClass('hidden');
+    $('#delay > h3').addClass('beat').one('animationend webkitAnimationEnd oAnimationEnd', function() { $(this).removeClass('beat'); });
+
+    let load = delay;
+    loading = setInterval(function() {
+      load > 0 ? load-- : 0;
+
+      if (load <= 0) {
+        clearInterval(loading);
+        $('#delay').addClass('hidden');
+
+        newTarget();
+        $('#timer').removeClass('hidden');
+
+        let left = timer;
+        countdown = setInterval(function() {
+          left > 0 ? left-- : 0;
+
+          if (left <= 0) {
+            clearInterval(countdown);
+            $('#timer').addClass('hidden');
+            $('.renne').remove();
+            $('.card > .content > .bubble').text(score);
+            $('.card > .content > img').attr('src', troupeauRennes[Math.floor(Math.random() * troupeauRennes.length)]);
+            $('.card > .text').html(score == 1 ? 'Renne&nbsp;capturé' : 'Rennes&nbsp;capturés');
+            $('#result').removeClass('hidden');
+
+            //if (player && score)
+          } else {
+            $('#timer > span').text(left);
+          }
+        }, 1000);
+      } else {
+        $('#delay > h3').text(load).addClass('beat').one('animationend webkitAnimationEnd oAnimationEnd', function() { $(this).removeClass('beat'); });
+      };
+    }, 1500);
+  };
 
   // Let's go
   $('#welcome').click(function() {
     $(this).fadeOut(1000, function() {
       $(this).addClass('hidden');
-      if(player || true) {
+      if (player || true) {
         $('#success').removeClass('hidden');
         startGame();
       } else {
         $('#form').removeClass('hidden');
 
         $('#confirm').click(function() {
-          if($('#player').val() && $('#player').val().length > 2) {
+          if ($('#player').val() && $('#player').val().length > 2) {
             player = $('#player').val();
             try { localStorage.setItem('RC_player', player); } catch (e) { console.log(e); };
 
