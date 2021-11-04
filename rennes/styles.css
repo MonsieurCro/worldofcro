@@ -133,6 +133,13 @@ input.error, select.error {
   background-position-x: left;
   background-image: url('./assets/fancyline-right.svg');
 }
+.separator {
+  width: 100%; height: 3.5em;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('./assets/fancy-divider.svg');
+}
 .modal {
   position: fixed;
   top: 0; left: 0; bottom: 0; right: 0;
