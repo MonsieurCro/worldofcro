@@ -101,7 +101,7 @@ input.error, select.error {
 }
 @media screen and (max-width: 900px){
   html {
-    font-size: 2vw;
+    font-size: 1.875vw;
   }
 }
 @media screen and (max-width: 600px){
@@ -153,8 +153,11 @@ input.error, select.error {
 #header {
   position: fixed;
   z-index: 2;
-  top: 1em; left: 1em; right: 1em; bottom: auto;
+  top: .875em; left: .875em; right: .875em; bottom: auto;
   text-align: right;
+}
+#header > * {
+  margin: .125em;
 }
 #header > .info {
   display: inline-block;
@@ -233,6 +236,25 @@ input.error, select.error {
   color: #A0AFB4;
   padding: .5em .125em;
   line-height: 1.15em;
+}
+#highscores {
+  background-color: rgba(0, 0, 0, .75);
+  z-index: 1;
+}
+#highscores ul {
+  list-style-type: none;
+  padding: .375em .875em; margin: .75em .25em;
+  width: 90%; max-width: 300px;
+  background-color: rgba(72, 72, 72, .25);
+  border-radius: .175em;
+}
+#highscores  ul > li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: .25em;
+  font-size: 1.25em;
 }
 footer {
   position: fixed;

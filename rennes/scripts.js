@@ -31,7 +31,7 @@ $(document).ready(function() {
 
   $('#score > span').text(score);
   $('#timer > span').text(timer);
-  $('#mode').html(challenge ? 'Zen&nbsp;Mode' : 'Challenge&nbsp;Mode');
+  $('#mode').html(challenge ? 'Zen' : 'Défi');
   $('#delay > h3').text(delay);
 
   // Functions
@@ -39,7 +39,7 @@ $(document).ready(function() {
     setTimeout(function() {
       $('#start').fadeOut(1000, function() {
         $(this).remove();
-        $('#mode, #score').removeClass('hidden');
+        $('#mode, #scores, #score').removeClass('hidden');
 
         if (challenge) {
           challengeMode();
@@ -59,7 +59,7 @@ $(document).ready(function() {
 
     $('#score > span').text(score);
     $('#timer').addClass('hidden').one('transitionend webkitTransitionEnd oTransitionEnd', function() { $(this).children('span').text(timer); });
-    $('#mode').html(challenge ? 'Zen&nbsp;Mode' : 'Challenge&nbsp;Mode');
+    $('#mode').html(challenge ? 'Zen' : 'Défi');
     $('#delay').addClass('hidden').one('transitionend webkitTransitionEnd oTransitionEnd', function() { $(this).children('h3').text(delay).removeClass('beat'); });
     $('#result').addClass('hidden');
 
@@ -118,9 +118,17 @@ $(document).ready(function() {
             $('.card > .content > .bubble').text(score);
             $('.card > .content > img').attr('src', troupeauRennes[Math.floor(Math.random() * troupeauRennes.length)]);
             $('.card > .text').html(score == 1 ? 'Renne&nbsp;capturé' : 'Rennes&nbsp;capturés');
-            $('#result').removeClass('hidden');
 
-            //if (player && score)
+            if (player && score) {
+              let gameData = { player: player, score: score, date: Date.now() };
+              try {
+                $.post('https://crocro.glitch.me/newgame/Halloween2021', gameData, function(data, status) {
+                  //if (status == 'success') { console.log(data); };
+                });
+              } catch(e) { console.log(e); }
+            }
+
+            $('#result').removeClass('hidden');
           } else {
             $('#timer > span').text(left);
           }
@@ -135,7 +143,7 @@ $(document).ready(function() {
   $('#welcome').click(function() {
     $(this).fadeOut(1000, function() {
       $(this).addClass('hidden');
-      if (player || true) {
+      if (player) {
         $('#success').removeClass('hidden');
         startGame();
       } else {
@@ -160,6 +168,21 @@ $(document).ready(function() {
   $('#mode').click(function() {
     challenge = !challenge;
     resetGame();
+  });
+  $('#scores').click(function() {
+    // Load highscores
+    try {
+      $.get('https://crocro.glitch.me/highscores/Halloween2021', function(data, status) {
+        if (status == 'success' && Object.keys(data).length > 0) {
+          Object.keys(data).forEach(function(key) {
+            $('#highscores > ul').append('<li><span>' + key + '</span><span>' + data[key] + '</span></li>');
+          });
+          $('#highscores').removeClass('hidden');
+        } else {
+          //
+        };
+      });
+    } catch(e) { console.log(e); }
   });
   // Replay
   $('#retry').click(function() {
