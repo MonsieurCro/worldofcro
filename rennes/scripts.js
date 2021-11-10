@@ -61,7 +61,8 @@ $(document).ready(function() {
     $('#timer').addClass('hidden').one('transitionend webkitTransitionEnd oTransitionEnd', function() { $(this).children('span').text(timer); });
     $('#mode').html(challenge ? 'Zen' : 'Défi');
     $('#delay').addClass('hidden').one('transitionend webkitTransitionEnd oTransitionEnd', function() { $(this).children('h3').text(delay).removeClass('beat'); });
-    $('#result').addClass('hidden');
+    $('#highscores, #result').addClass('hidden');
+    $('#scores').removeClass('hidden');
 
     if (challenge) {
       challengeMode();
@@ -93,6 +94,7 @@ $(document).ready(function() {
     });
   };
   function challengeMode() {
+    $('#scores').addClass('hidden');
     $('#delay').removeClass('hidden');
     $('#delay > h3').addClass('beat').one('animationend webkitAnimationEnd oAnimationEnd', function() { $(this).removeClass('beat'); });
 
@@ -173,6 +175,7 @@ $(document).ready(function() {
   $('#scores').click(function() {
     $('#highscores > ul').html('Chargement…');
     $('#highscores').removeClass('hidden');
+    $('#scores').addClass('hidden');
 
     try {
       $.get('https://crocro.glitch.me/highscores/Halloween2021', function(data, status) {
@@ -188,6 +191,7 @@ $(document).ready(function() {
   });
   $('#highscores > .close').click(function() {
     $('#highscores').addClass('hidden');
+    $('#scores').removeClass('hidden');
   });
   // Replay
   $('#retry').click(function() {
