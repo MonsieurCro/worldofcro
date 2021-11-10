@@ -169,20 +169,25 @@ $(document).ready(function() {
     challenge = !challenge;
     resetGame();
   });
+  // HighScores
   $('#scores').click(function() {
-    // Load highscores
+    $('#highscores > ul').html('Chargement…');
+    $('#highscores').removeClass('hidden');
+
     try {
       $.get('https://crocro.glitch.me/highscores/Halloween2021', function(data, status) {
         if (status == 'success' && Object.keys(data).length > 0) {
           Object.keys(data).forEach(function(key) {
-            $('#highscores > ul').append('<li><span>' + key + '</span><span>' + data[key] + '</span></li>');
+            $('#highscores > ul').html('').append('<li><span>' + key + '</span><span>' + data[key] + '</span></li>');
           });
-          $('#highscores').removeClass('hidden');
         } else {
-          //
+          $('#highscores > ul').html('Une erreur est survenue.');
         };
       });
     } catch(e) { console.log(e); }
+  });
+  $('#highscores > .close').click(function() {
+    $('#highscores').addClass('hidden');
   });
   // Replay
   $('#retry').click(function() {

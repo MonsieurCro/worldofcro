@@ -237,14 +237,46 @@ input.error, select.error {
   padding: .5em .125em;
   line-height: 1.15em;
 }
+.pop {
+  position: fixed;
+  top: 50%; left: 50%; bottom: auto; right: auto;
+  transform: translate(-50%, -50%);
+  width: 85%; height: auto;
+  max-width: 400px; max-height: 85%;
+  padding: 1em; margin: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: .175em;
+  box-shadow: 0 0 .5em rgb(0, 0, 0, .25);
+}
+.pop > .close {
+  position: absolute;
+  bottom: calc(-1.25em / 2); left: calc(50% - (1.25em / 2)); top: auto; right: auto;
+  width: 1.25em; height: 1.25em;
+  line-height: 1.25em;
+  text-align: center;
+  font-size: 1.5em;
+  background-color: #484848;
+  border-radius: .075em;
+  box-shadow: 0 0 .5em rgb(0, 0, 0, .25);
+  cursor: pointer;
+  transition: all .3s ease;
+}
+.pop > .close:hover {
+  background-color: #FE7900;
+  transform: rotate(45deg);
+}
 #highscores {
-  background-color: rgba(0, 0, 0, .75);
-  z-index: 1;
+  background-color: rgba(0, 0, 0, .9);
+  z-index: 6;
 }
 #highscores ul {
   list-style-type: none;
-  padding: .375em .875em; margin: .75em .25em;
-  width: 90%; max-width: 300px;
+  padding: .375em .875em; margin: .75em auto;
+  width: 90%;
   background-color: rgba(72, 72, 72, .25);
   border-radius: .175em;
 }
