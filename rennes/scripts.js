@@ -180,8 +180,9 @@ $(document).ready(function() {
     try {
       $.get('https://crocro.glitch.me/highscores/Halloween2021', function(data, status) {
         if (status == 'success' && Object.keys(data).length > 0) {
+          $('#highscores > ul').html('');
           Object.keys(data).forEach(function(key) {
-            $('#highscores > ul').html('').append('<li><span>' + key + '</span><span>' + data[key] + '</span></li>');
+            $('#highscores > ul').append('<li><span>' + key + '</span><span>' + data[key] + '</span></li>');
           });
         } else {
           $('#highscores > ul').html('Une erreur est survenue.');
