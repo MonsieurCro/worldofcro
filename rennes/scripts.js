@@ -152,8 +152,8 @@ $(document).ready(function() {
         $('#form').removeClass('hidden');
 
         $('#confirm').click(function() {
-          if ($('#player').val() && $('#player').val().length > 2) {
-            player = $('#player').val();
+          if ($('#player').val() && $('#player').val().replace(' ', '').length > 2) {
+            player = $('#player').val().trim();
             try { localStorage.setItem('RC_player', player); } catch (e) { console.log(e); };
 
             $('#form').fadeOut(1000, function() {
