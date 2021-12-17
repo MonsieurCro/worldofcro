@@ -8,67 +8,136 @@
   <meta name="msapplication-navbutton-color" content="#261A30">
   <meta name="apple-mobile-web-app-status-bar-style" content="#261A30">
 
-  <title>Rennes Clicker.</title>
+  <title>RennesClicker</title>
   <meta name="author" content="MonsieurCro">
-  <link rel="shortcut icon" type="image/png" href="./assets/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="./favicon.png">
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
-  <link rel="stylesheet" href="./styles.css">
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <style>
+    @charset "UTF-8";
+    /*Common*/
+    * {
+      outline: none;
+      outline-color: transparent;
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+      -webkit-touch-callout: none;
+      -webkit-user-drag: none;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      font-family: 'Lobster', sans-serif;
+      color: #35373B;
+    }
+    *:not(input):not(select) {
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -o-user-select: none;
+      user-select: none;
+    }
+    html {
+      width: 100%; height: 100%;
+      margin: 0; padding: 0;
+      overflow: hidden;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      scroll-behavior: smooth;
+    }
+    html::-webkit-scrollbar {
+      width: 0; height: 0;
+      display: none;
+    }
+    body {
+      height: 100%; width: 100%;
+      margin: 0; padding: 1em;
+      background-color: #F4F8FC;
+      text-align: center;
+    }
+    h1, h2, h3, h4, h5, h6, p {
+      margin: .25em auto; padding: 0 .175em;
+    }
+    span, a {
+      color: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      font-family: inherit;
+    }
+    a {
+      cursor: pointer;
+      text-decoration: none;
+      transition: all .3s ease;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      width: 100%; max-width: 1200px;
+      margin: auto; padding: 1em;
+      text-align: center;
+    }
+    .card {
+      width: 100%; height: 12.5em;
+      min-height: 25vh; max-height: 50vh;
+      padding: .75em; margin: 1.25em auto;
+      border-radius: .25em;
+      box-shadow: 0 0 .75em rgba(0, 0, 0, .125);
+      position: relative;
+    }
+    .card .visual {
+      background-size: auto 80%, cover;
+      background-position: center, center top;
+      background-repeat: no-repeat;
+      position: absolute;
+      top: .5em; left: .5em; bottom: .5em; right: .5em;
+      width: calc(100% - 1em); height: calc(100% - 1em);
+      border-radius: .125em;
+      overflow: hidden;
+    }
+    footer {
+      position: fixed;
+      left: 0; right: 0; bottom: .5em; top: auto;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: .75em;
+    }
+    @media screen and (max-width: 900px){
+      html {
+        font-size: 1.875vw;
+      }
+    }
+    @media screen and (max-width: 600px){
+      html {
+        font-size: 3.75vw;
+      }
+    }
+  </style>
 </head>
 <body>
-  <nav id="header">
-    <div id="mode" class="button hidden">Chargement…</div>
-    <div id="scores" class="button hidden">Scores</div>
-    <div id="timer" class="info hidden"><span>0</span>&nbsp;s</div>
-    <div id="score" class="info hidden"><span>0</span>&nbsp;pts</div>
-  </nav>
+  <h3>RennesClicker</h3>
 
-  <div id="start" class="modal">
-    <div id="welcome" class="modal pulse">
-      <img class="image" src="./assets/logo_d1183.svg" alt="CHASSE AUX RENNES" title="">
-      <h2 class="fancy">Cliquez&nbsp;pour&nbsp;démarrer</h2>
-    </div>
-
-    <div id="form" class="modal hidden">
-      <input id="player" type="text" placeholder="Entrez votre pseudo." required autofocus>
-      <div id="confirm" class="button">Confirmer</div>
-    </div>
-
-    <div id="success" class="modal hidden">
-      <h1 class="fancy">Bonne&nbsp;chasse&nbsp;!</h1>
-    </div>
-  </div>
-
-  <div id="delay" class="modal hidden"><h3>Chargement…</h3></div>
-
-  <div id="result" class="modal hidden">
-    <h2 class="fancy">La&nbsp;chasse est&nbsp;terminée&nbsp;!</h2>
-
-    <div class="card">
-      <div class="content">
-        <img src="" alt="" title="">
-        <div class="bubble">0</div>
+  <div class="container">
+    <a href="./christmas2021/" target="_self">
+      <div class="card" id="christmas2021">
+        <div class="visual" style="background-image:url('./christmas2021/assets/logo_d007f.svg'),url('./christmas2021/assets/forest_eebbf.svg');"></div>
+        <!-- <p>Christmas&nbsp;2021</p> -->
       </div>
-      <div class="text">…</div>
-    </div>
-
-    <div id="retry" class="button">Réessayer&nbsp;?</div>
-  </div>
-
-  <div id="highscores" class="pop hidden">
-    <div class="close">✕</div>
-    <h2 class="fancy">Meilleurs&nbsp;scores&nbsp;(défi)</h2>
-    <ul>Chargement…</ul>
+    </a>
+    <a href="./halloween2021/" target="_self">
+      <div class="card" id="halloween2021">
+        <div class="visual" style="background-image:url('./halloween2021/assets/logo_d1183.svg'),url('./halloween2021/assets/forest_c5d47.svg');"></div>
+        <!-- <p>Halloween&nbsp;2021</p> -->
+      </div>
+    </a>
   </div>
 
   <footer>
-    <div class="separator"></div>
     <a href="https://www.dealabs.com/profile/MonsieurCro" target="_blank"><p>MonsieurCro&nbsp;2021</p></a>
   </footer>
-
-  <script type="text/javascript" charset="utf-8" src="./scripts.js"></script>
 </body>
 </html>

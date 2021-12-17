@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#261A30">
+  <meta name="msapplication-navbutton-color" content="#261A30">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#261A30">
+
+  <title>RennesClicker \ Christmas 2021</title>
+  <meta name="author" content="MonsieurCro">
+  <link rel="shortcut icon" type="image/png" href="./assets/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
+  <link rel="stylesheet" href="./styles.css">
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <nav id="header">
+    <div id="mode" class="button hidden">Chargement…</div>
+    <div id="scores" class="button hidden">Scores</div>
+    <div id="timer" class="info hidden"><span>0</span>&nbsp;s</div>
+    <div id="score" class="info hidden"><span>0</span>&nbsp;pts</div>
+  </nav>
+
+  <div id="start" class="modal">
+    <div id="welcome" class="modal pulse">
+      <img class="image" src="./assets/logo_d007f.svg" alt="CHASSE AUX RENNES" title="">
+      <h2 class="fancy">Cliquez&nbsp;pour&nbsp;démarrer</h2>
+    </div>
+
+    <div id="form" class="modal hidden">
+      <input id="player" type="text" placeholder="Entrez votre pseudo." required autofocus>
+      <div id="confirm" class="button">Confirmer</div>
+    </div>
+
+    <div id="success" class="modal hidden">
+      <h1 class="fancy">Bonne&nbsp;chasse&nbsp;!</h1>
+    </div>
+  </div>
+
+  <div id="delay" class="modal hidden"><h3>Chargement…</h3></div>
+
+  <div id="result" class="modal hidden">
+    <h2 class="fancy">La&nbsp;chasse est&nbsp;terminée&nbsp;!</h2>
+
+    <div class="card">
+      <div class="content">
+        <img src="" alt="" title="">
+        <div class="bubble">0</div>
+      </div>
+      <div class="text">…</div>
+    </div>
+
+    <div id="retry" class="button">Réessayer&nbsp;?</div>
+  </div>
+
+  <div id="highscores" class="pop hidden">
+    <div class="close">✕</div>
+    <h2 class="fancy">Meilleurs&nbsp;scores&nbsp;(défi)</h2>
+    <ul>Chargement…</ul>
+  </div>
+
+  <footer>
+    <div class="separator"></div>
+    <a href="https://www.dealabs.com/profile/MonsieurCro" target="_blank"><p>MonsieurCro&nbsp;2021</p></a>
+  </footer>
+
+  <script type="text/javascript" charset="utf-8" src="./scripts.js"></script>
+</body>
+</html>
