@@ -162,7 +162,7 @@ input.error, select.error {
 #header > .info {
   display: inline-block;
   padding: .125em .75em;
-  background-color: #FF7900;
+  color: white; background-color: #FF7900;
   border-radius: .175em;
   border-top: .25em solid rgb(204, 97, 0);
   border-bottom: .25em solid rgb(204, 97, 0);
@@ -257,7 +257,7 @@ input.error, select.error {
   bottom: calc(-1.25em / 2); left: calc(50% - (1.25em / 2)); top: auto; right: auto;
   width: 1.25em; height: 1.25em;
   text-align: center;
-  background-color: #484848;
+  color: white; background-color: #484848;
   border-radius: .075em;
   box-shadow: 0 0 .5em rgb(0, 0, 0, .25);
   cursor: pointer;
@@ -271,7 +271,7 @@ input.error, select.error {
   transform: rotate(45deg);
 }
 #highscores {
-  background-color: rgba(0, 0, 0, .9);
+  color: white; background-color: rgba(0, 0, 0, .9);
   z-index: 6;
 }
 #highscores ul {
@@ -304,9 +304,6 @@ footer {
   justify-content: center;
   align-items: center;
   font-size: .75em;
-}
-footer > img {
-  height: 3.5em;
 }
 /*Keyframes*/
 .pulse {

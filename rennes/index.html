@@ -28,7 +28,7 @@
       -moz-box-sizing: border-box;
       box-sizing: border-box;
       font-family: 'Lobster', sans-serif;
-      color: #35373B;
+      color: #00294E;
     }
     *:not(input):not(select) {
       -webkit-user-select: none;
@@ -52,12 +52,13 @@
     }
     body {
       height: 100%; width: 100%;
-      margin: 0; padding: 1em;
-      background-color: #F4F8FC;
+      margin: 0; padding: 1em 0;
+      background-color: #F5F9FC;
       text-align: center;
     }
     h1, h2, h3, h4, h5, h6, p {
       margin: .25em auto; padding: 0 .175em;
+      z-index: 1;
     }
     span, a {
       color: inherit;
@@ -73,18 +74,24 @@
     a:hover {
       text-decoration: underline;
     }
+    .block {
+      margin: 1em auto;
+      color: white; background-color: #BF0930;
+      text-align: center;
+    }
     .container {
       width: 100%; max-width: 1200px;
-      margin: auto; padding: 1em;
-      text-align: center;
+      margin: auto; padding: .75em 1.5em;
     }
     .card {
       width: 100%; height: 12.5em;
       min-height: 25vh; max-height: 50vh;
       padding: .75em; margin: 1.25em auto;
       border-radius: .25em;
+      background-color: #F5F9FC;
       box-shadow: 0 0 .75em rgba(0, 0, 0, .125);
       position: relative;
+      z-index: 2;
     }
     .card .visual {
       background-size: auto 80%, cover;
@@ -93,7 +100,7 @@
       position: absolute;
       top: .5em; left: .5em; bottom: .5em; right: .5em;
       width: calc(100% - 1em); height: calc(100% - 1em);
-      border-radius: .125em;
+      border-radius: .175em;
       overflow: hidden;
     }
     footer {
@@ -105,6 +112,7 @@
       justify-content: center;
       align-items: center;
       font-size: .75em;
+      z-index: 3;
     }
     @media screen and (max-width: 900px){
       html {
@@ -116,28 +124,72 @@
         font-size: 3.75vw;
       }
     }
+    .fancy {
+      position: relative;
+      display: inline-block;
+    }
+    .fancy::before, .fancy::after {
+      content: "";
+      position: absolute;
+      top: 5%; bottom: 5%;
+      height: 90%; width: 2em;
+      background-size: contain;
+      background-position-y: center;
+      background-repeat: no-repeat;
+      opacity: .75;
+    }
+    .fancy::before {
+      right: 100%; left: auto;
+      background-position-x: right;
+      background-image: url('./christmas2021/assets/fancyline-left.svg');
+    }
+    .fancy::after {
+      left: 100%; right: auto;
+      background-position-x: left;
+      background-image: url('./christmas2021/assets/fancyline-right.svg');
+    }
+    .separator {
+      width: 100%; height: 3.5em;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-image: url('./christmas2021/assets/fancy-divider.svg');
+}
+    #snow {
+      position: fixed;
+      height: 104vh; width: 104vw;
+      top: -2vh; left: -2vw; right: -2vw; bottom: -2vh;
+      overflow: hidden;
+      /*z-index: -1;*/
+    }
   </style>
 </head>
 <body>
-  <h3>RennesClicker</h3>
+  <h1 class="fancy">RennesClicker</h1>
 
-  <div class="container">
-    <a href="./christmas2021/" target="_self">
-      <div class="card" id="christmas2021">
-        <div class="visual" style="background-image:url('./christmas2021/assets/logo_d007f.svg'),url('./christmas2021/assets/forest_eebbf.svg');"></div>
-        <!-- <p>Christmas&nbsp;2021</p> -->
-      </div>
-    </a>
-    <a href="./halloween2021/" target="_self">
-      <div class="card" id="halloween2021">
-        <div class="visual" style="background-image:url('./halloween2021/assets/logo_d1183.svg'),url('./halloween2021/assets/forest_c5d47.svg');"></div>
-        <!-- <p>Halloween&nbsp;2021</p> -->
-      </div>
-    </a>
+  <div class="block">
+    <div class="container">
+      <a href="./christmas2021/" target="_self">
+        <div class="card" id="christmas2021">
+          <div class="visual" style="background-image:url('./christmas2021/assets/logo_d007f.svg'),url('./christmas2021/assets/forest_eebbf.svg');"></div>
+          <!-- <p>Christmas&nbsp;2021</p> -->
+        </div>
+      </a>
+      <a href="./halloween2021/" target="_self">
+        <div class="card" id="halloween2021">
+          <div class="visual" style="background-image:url('./halloween2021/assets/logo_d1183.svg'),url('./halloween2021/assets/forest_c5d47.svg');"></div>
+          <!-- <p>Halloween&nbsp;2021</p> -->
+        </div>
+      </a>
+    </div>
   </div>
 
   <footer>
+    <div class="separator"></div>
     <a href="https://www.dealabs.com/profile/MonsieurCro" target="_blank"><p>MonsieurCro&nbsp;2021</p></a>
   </footer>
+
+  <canvas id="snow"></canvas>
+  <script type="text/javascript" src="./snow.js"></script>
 </body>
 </html>
