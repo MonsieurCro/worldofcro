@@ -66,17 +66,17 @@ button, input, select {
   border: none;
 }
 button, .button {
-  color: #E00034; background-color: white;
+  color: white; background-color: #E00034;
   padding: .375em .75em;
   border-radius: .175em;
   cursor: pointer;
   transition: all .3s ease;
 }
 button:hover, .button:hover, button:active, .button:active {
-  color: white; background-color: #E00034;
+  color: #E00034; background-color: white;
 }
 input, select {
-  color: white; background-color: #35373B;
+  color: #35373B; background-color: white;
   padding: .25em .75em; margin: 0 auto .5em;
   border: .125em solid #35373B;
   border-radius: .175em;
@@ -88,7 +88,7 @@ input:hover, select:hover, input:focus, select:focus {
   border-color: #E00034;
 }
 input.error, select.error {
-  border-color: #35373B;
+  border-color: #B7002B;
 }
 .hidden {
   opacity: 0 !important;
