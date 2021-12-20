@@ -3,16 +3,28 @@ $(document).ready(function() {
   const troupeauRennes = [
     "./assets/candle-level1_f3b65.svg",
     "./assets/candle-level2_b8ad8.svg",
+    "./assets/candle-level3.svg",
     "./assets/candycane-level1_05eae.svg",
     "./assets/candycane-level2_2aa78.svg",
+    "./assets/candycane-level3.svg",
     "./assets/ginger-level1_b4c6c.svg",
     "./assets/ginger-level2_3e3d9.svg",
+    "./assets/ginger-level3.svg",
     "./assets/hot_chocolate-level1_167b6.svg",
     "./assets/hot_chocolate-level2_2199c.svg",
+    "./assets/hot_chocolate-level3.svg",
     "./assets/wreath-level1_b496d.svg",
     "./assets/wreath-level2_920cc.svg",
+    "./assets/wreath-level3.svg",
     "./assets/yeti-level1_f7f54.svg",
-    "./assets/yeti-level2_7792d.svg"
+    "./assets/yeti-level2_7792d.svg",
+    "./assets/yeti-level3.svg",
+    "./assets/xmas_tree-level1_610c0.svg",
+    "./assets/xmas_tree-level2_43282.svg",
+    "./assets/xmas_tree-level3.svg",
+    "./assets/ornamental-level1_1d424.svg",
+    "./assets/ornamental-level2_2d001.svg",
+    "./assets/ornamental-level3.svg"
   ];
 
   // Variables
