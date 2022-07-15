@@ -6,7 +6,7 @@ $(document).ready(function() {
     "./assets/flamingo-level1_cf7d7.svg",
     "./assets/flamingo-level2_8d0b3.svg",
     "./assets/lifeguard-level1_b0c31.svg",
-    //"./assets/lifeguard-level2_.svg",
+    "./assets/lifeguard-level2_8cff2.svg",
     "./assets/sandcastle-level1_9e8ec.svg",
     "./assets/sandcastle-level2_d4ec4.svg",
     "./assets/ukulele-level1_af270.svg",

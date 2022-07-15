@@ -76,7 +76,7 @@ button:hover, .button:hover, button:active, .button:active {
   color: white; background-color: #524E31;
 }
 input, select {
-  color: white; background-color: #35373B;
+  color: #35373B; background-color: white;
   padding: .25em .75em; margin: 0 auto .5em;
   border: .125em solid #35373B;
   border-radius: .175em;
