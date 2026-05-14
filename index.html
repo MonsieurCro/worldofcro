@@ -1,350 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8"/>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <meta name="theme-color" content="#333333"/>
-  <meta name="msapplication-navbutton-color" content="#333333"/>
-  <meta name="apple-mobile-web-app-status-bar-style" content="#333333"/>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
   <title>A World of Cro</title>
-  <meta name="author" content="MonsieurCro"/>
-  <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico"/>
+  <meta name="description" content="" />
+  <meta name="author" content="MonsieurCro" />
 
-  <style>
-    * {
-      outline: none;
-      outline-color: transparent;
-      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-       -khtml-user-select: none;
-         -moz-user-select: none;
-          -ms-user-select: none;
-           -o-user-select: none;
-              user-select: none;
-      -webkit-user-drag: none;
-                user-drag: none;
-      -webkit-box-sizing: border-box;
-         -moz-box-sizing: border-box;
-              box-sizing: border-box;
-    }
-    button, input[type="button"], .button {
-      -webkit-appearance: none;
-         -moz-appearance: none;
-        -ms-appearance: none;
-      margin: 0; padding: 0;
-      border: none;
-      background: none;
-      cursor: pointer;
-    }
-    html {
-      width: 100%; height: auto;
-      margin: 0; padding: 0;
-      overflow-y: auto;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-    html::-webkit-scrollbar {
-        width: 0; height: 0;
-        display: none;
-    }
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #00B5FF;
-      width: 100%; min-height: 100vh;
-      margin: 0; padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      -webkit-transition: background-color .45s ease .09s;
-         -moz-transition: background-color .45s ease .09s;
-              transition: background-color .45s ease .09s;
-    }
-    .fadeOut {
-      opacity: 0;
-      z-index: -1 !important;
-      -webkit-transition: opacity 2.5s;
-         -moz-transition: opacity 2.5s;
-              transition: opacity 2.5s;
-    }
-    .fadeIn {
-      opacity: 1;
-      -webkit-transition: opacity 5s;
-         -moz-transition: opacity 5s;
-              transition: opacity 5s;
-    }
-    #bg-image {
-      background-image: url(./assets/backgroundS1.jpg);
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center;
-      opacity: .25;
-      overflow: hidden;
-      height: 104vh; width: 104vw;
-      position: fixed;
-      top: -2vh; left: -2vw; right: -2vw; bottom: -2vh;
-      z-index: -1;
-        -webkit-transition: background 4.5s ease-in-out;
-           -moz-transition: background 4.5s ease-in-out;
-                transition: background 4.5s ease-in-out;
-    }
-    #snow-canva {
-      width: 100%; height: 100%;
-    }
-    #lcframe {
-      width: 100%; height: auto;
-      margin: .5em 0; padding: 0;
-      color: white;
-      background-color: transparent;
-      text-align: center;
-    }
-    #pop {
-      position: fixed;
-      bottom: 12.5%; left: 0; top: auto; right: auto;
-      z-index: 1000;
-      width: calc(100% - 60px); max-width: 380px;
-      padding: 30px;
-      transform: translateX(-100%);
-      -webkit-transition: transform .25s linear;
-         -moz-transition: transform .25s linear;
-              transition: transform .25s linear;
-      color: white;
-      background-image: linear-gradient(135deg, #D9D9D9, #202020);
-      background-color: #D9D9D9;
-    }
-    #pop.show {
-      transform: translateX(0);
-      box-shadow: 0 0 15px rgba(29, 38, 45, .65);
-    }
-    #pop::before, #pop::after {
-      content: '';
-      position: absolute;
-      bottom: 0; right: 0; top: auto; left: auto;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      background-repeat: no-repeat;
-    }
-    #pop::before {
-      background-image: url(./assets/parchemin.jpg);
-      background-size: cover;
-      background-position: bottom right;
-      opacity: .5;
-    }
-    #pop::after {
-      background-image: url(./assets/tentacles.png);
-      background-size: auto 160%;
-      background-position: top right;
-    }
-    #pop #close {
-      position: absolute;
-      top: 0; right: 0; bottom: auto; left: auto;
-      width: 20px; height: 20px;
-      font-size: 20px; line-height: 20px;
-      z-index: 2;
-      color: white;
-      background-color: rgba(55, 55, 55, .9);
-      padding: 7px;
-      box-sizing: content-box;
-      -webkit-transition: all .3s ease;
-         -moz-transition: all .3s ease;
-              transition: all .3s ease;
-    }
-    #pop #close:hover {
-      background-color: rgba(55, 55, 55, .99);
-      -webkit-transition: all .3s ease;
-         -moz-transition: all .3s ease;
-              transition: all .3s ease;
-    }
-    #pop #gift {
-      position: absolute;
-      top: 100%; left: 100%; bottom: auto; right: auto;
-      z-index: 2;
-      width: 120px; height: 120px;
-      transform: translateX(-55%) translateY(-65%);
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: 100% auto;
-      background-image: url(./assets/cro.png)
-    }
-    #pop .content {
-      position: relative;
-      max-width: 250px;
-      z-index: 3;
-    }
-    #pop button.cta {
-      display: inline-block;
-      position: relative;
-      height: 30px; line-height: 30px;
-      margin: 7.5px 0;
-      padding: 0 1em;
-      border-radius: 3px;
-      color: white;
-      background-color: #BB4158;
-      font-size: .9em;
-      font-weight: 500;
-      cursor: pointer;
-    }
-    #pop button.cta:hover {
-      background-color: #752937;
-      -webkit-transition: all .25s ease;
-         -moz-transition: all .25s ease;
-          transition: all .25s ease;
-    }
-    #end {
-      position: fixed;
-      z-index: 999;
-      width: 90vw; height: 90vw;
-      max-width: 550px; max-height: 550px;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    #end img {
-      width: auto; height: auto;
-      max-width: 100%; max-height: 100%;
-    }
-    footer {
-      background-color: rgba(0, 0, 0, .15);
-      color: white;
-      text-align: center;
-      position: fixed;
-      left: 0; right: 0; bottom: 0; top: auto;
-      width: 100%; height: 2.5em; line-height: 2.5em;
-      font-size: 65%;
-    }
-    footer a {
-      color: white;
-      text-decoration: none;
-    }
-    .pulse {
-      -webkit-animation: pulse ease-out 3s infinite;
-      animation: pulse ease-out 3s infinite;
-    }
-    @-webkit-keyframes pulse {
-      25%     { -webkit-transform: scale(1.05, 1.05); }
-      50%, 100% { -webkit-transform: scale(1, 1); }
-    }
-    @keyframes pulse {
-      25%       { transform: scale(1.05, 1.05); }
-      50%, 100% { transform: scale(1, 1); }
-    }
-  </style>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#fff3d5" />
+  <meta name="msapplication-navbutton-color" content="#fff3d5" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="#fff3d5" />
+
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <div id="bg-image">
-    <canvas id="snow-canva" class="winter fadeOut"></canvas>
-  </div>
-
-  <div id="lcframe">
-    <h2>Chargement…</h2>
-    <p>Si rien ne se passe, merci de ne pas pleurer et d'essayer sur un autre navigateur&nbsp;!</p>
-  </div>
-
-  <script>
-    var OP_ID = '363fe630809ec8db1427839b58b0fce8';
-    var POKE_ID = Date.now();
-
-    try {
-      if(localStorage.getItem('poke_id') && localStorage.getItem('poke_id') != 'null'){
-        POKE_ID = localStorage.getItem('poke_id');
-      };
-    } catch(event) { console.log(event); };
-
-    // IE fix
-    if(typeof Object.assign !== "function"){
-      Object.defineProperty(Object, "assign",{
-        value: function assign(target, varArgs){
-          "use strict";
-          if(target === null || target === undefined){
-            throw new TypeError("Cannot convert undefined or null to object");
-          };
-          var to = Object(target);
-          for(var index = 1; index < arguments.length; index++){
-            var nextSource = arguments[index];
-            if(nextSource !== null && nextSource !== undefined){
-              for(var nextKey in nextSource){
-                if(Object.prototype.hasOwnProperty.call(nextSource, nextKey)){
-                  to[nextKey] = nextSource[nextKey];
-                };
-              };
-            };
-          };
-          return to;
-        },
-        writable: true,
-        configurable: true
-      });
-    };
-
-    function poke(OP_ID, POKE_ID){
-      window._lcdata = Object.assign({
-        item_uid : POKE_ID,
-        user_uid : POKE_ID,
-        language : 'fr',
-        item_value : 1
-      });
-      var _frf = document.createElement('script');
-      _frf.setAttribute('type', 'text/javascript');
-      _frf.setAttribute('src', 'https://www.luckycycle.com/client/fjs/' + OP_ID + '.js');
-      _frf.async = !0;
-      document.getElementsByTagName('head')[0].appendChild(_frf);
-
-      try {
-        localStorage.setItem('poke_id', POKE_ID);
-      } catch(event) { console.log(event); };
-    };
-    poke(OP_ID, POKE_ID);
-  </script>
-
-  <div id="pop">
-    <div class="content">
-      <h3>Besoin d'aide&nbsp;?</h3>
-      <p>Consulte la <strong>première saison</strong>.</p>
-      <a href="./origins" target="_blank">
-        <button class="cta">C'est par ici&nbsp;!</button>
-      </a>
-    </div>
-    <button id="close" onclick="{document.getElementById('pop').classList.remove('show');}">✕</button>
-    <button id="gift" onclick="{document.getElementById('pop').classList.toggle('show');}"></button>
-  </div>
-
-  <div id="end" class="winter fadeOut">
-    <a href="https://www.dealabs.com/discussions/jeux-steam-gratuits-gleam-woobox-etc-1071415" target="_blank">
-      <img class="pulse" src="./assets/logoS2.png" alt="A Wonderful Winter"/>
+  <main class="panels">
+    <a href="./origins" target="_self" aria-label="Redirige vers la première saison des aventures du Capitaine Cro et de son équipage, intitulée An Amazing Summer." class="panel" id="panel1" style="background-image: url('./assets/2018-summer/background.jpg'); background-color: rgba(234, 225, 198, .75);">
+      <img src="./assets/2018-summer/logo.png" alt="An Amazing Summer (2018)" />
     </a>
-  </div>
+    <a href="./2020-winter.html" target="_self" aria-label="Redirige vers la deuxième saison des aventures du Capitaine Cro et de son équipage, intitulée A Wonderful Winter." class="panel" id="panel2" style="background-image: url('./assets/2020-winter/background.jpg'); background-color: rgba(39, 76, 107, .75);">
+      <img src="./assets/2020-winter/logo.png" alt="A Wonderful Winter (2020)" />
+    </a>
+    <!-- <a href="./2021-autumn.html" target="_self" aria-label="Redirige vers la troisième saison des aventures du Capitaine Cro et de son équipage, intitulée A Spooky Night." class="panel" id="panel3" style="background-image: url('./assets/2021-autumn/background.jpg'); background-color: rgba(8, 10, 17, .75);">
+      <img src="./assets/2021-autumn/logo.png" alt="A Spooky Night (2021)" />
+    </a>
+    <a href="./2026-spring.html" target="_self" aria-label="Redirige vers la quatrième saison des aventures du Capitaine Cro et de son équipage, intitulée Les Jeux Crolympiques." class="panel" id="panel4" style="background-image: url('./assets/2026-spring/background.jpg'); background-color: rgba(236, 0, 0, .75);">
+      <img src="./assets/2026-spring/logo.jpg" alt="Les Jeux Crolympiques (2026)" />
+    </a> -->
+    <!-- <div class="panel" id="panel5" style="background-image: url(./assets/arch/tentacles.png), url(./assets/arch/parchemin.jpg); background-size: auto 100%, cover;">
+      <img src="./assets/arch/cro.png" alt="Capitaine Cro" />
+    </div> -->
+  </main>
 
-  <footer>Made with <span style="color:#EC0000;">❤</span> by <a href="https://www.dealabs.com/profile/MonsieurCro/overview" target="_blank">MonsieurCro</a></footer>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function(){
-      window.addEventListener('message', function(event){
-        var themeColor = event.data;
-        document.body.style.backgroundColor = themeColor;
-
-          // End game
-          if(themeColor == '#95B2D9'){
-            setTimeout(function(){
-              document.getElementById('lcframe').classList.add('fadeOut');
-              var winter = document.querySelectorAll('.winter');
-
-              setTimeout(function(){
-                winter.forEach(function(item){
-                  item.classList.remove('fadeOut');
-                  item.classList.add('fadeIn');
-                });
-                document.getElementById('bg-image').style.backgroundImage = 'url(./assets/backgroundS2.jpg)';
-                document.body.style.backgroundColor = '#003986';
-              }, 1000);
-            }, 4000);
-          };
-        }, false);
-    });
-  </script>
-  <script type="text/javascript" src="./snow.js"></script>
+  <footer>Made with <span style="color:#EC0000;">❤</span> by MonsieurCro</footer>
 </body>
 </html>

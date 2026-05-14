@@ -1,0 +1,233 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*:focus:not(:focus-visible) {
+  outline-color: transparent;
+}
+
+*:focus-visible {
+  outline-color: black;
+  outline-width: .25rem;
+  outline-offset: .175rem;
+}
+
+*:not(input):not(select) {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  box-shadow: 0 0 0 100vw white inset !important;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'Raleway', Arial, Helvetica, sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  text-align: center;
+  color: white;
+  background-color: #1d1d1d;
+}
+
+body {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 1fr auto;
+  text-align: center;
+  color: white;
+  background-image: url(./assets/pattern.png);
+  background-size: 20%;
+  background-position: center;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-color: #fff3d5;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+main::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.panels {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 800px) {
+  .panels {
+    flex-direction: column;
+  }
+}
+
+.panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, .25);
+  padding: 1.5%;
+  transition: all .6s ease;
+  outline: none;
+}
+
+a.panel:hover,
+a.panel:focus {
+  flex: 2;
+}
+
+.panel img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+footer {
+  background-color: rgb(0, 0, 0, .875);
+  font-size: 75%;
+  padding: .75em 1em;
+}
+
+
+
+.pop {
+  width: calc(100% - min(10vw, 10vh));
+  max-height: calc(100% - min(10vw, 10vh));
+  max-width: 1000px;
+  margin: min(5vw, 5vh) auto;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  box-shadow: 0 .75em .95em 0 rgba(0, 0, 0, .4);
+  padding: .75em 1.5em;
+  color: #0a0a0a;
+  background-color: white;
+  transition: .7s ease-in-out;
+}
+
+.pop .header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: .75em 0;
+}
+
+.pop .header h2 {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.pop .header h2 a {
+  color: inherit;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.pop .header .toggle {
+  cursor: pointer;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #909090;
+}
+
+.pop .header .toggle:hover {
+  color: #333333;
+}
+
+.pop.active .header .toggle {
+  transform: rotate(180deg);
+}
+
+.pop .content {
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  text-align: justify;
+  text-justify: auto;
+}
+
+.pop .content::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.pop:not(.active) .content {
+  height: 0;
+}
+
+.pop .content p,
+.pop .content li {
+  font-size: .95rem;
+  color: #686868;
+  line-height: 1.5;
+  margin: .5em 0;
+}
+
+.pop .content img {
+  display: block;
+  max-width: 100%;
+  margin: .875em auto;
+}
+
+.pop .content a {
+  color: #333333;
+}
+
+.pop .content a:hover {
+  text-decoration: none;
+}
+
+.pop .content ul,
+.pop .content ol {
+  text-align: left;
+  margin: 0;
+  padding-left: 1.5em;
+}
