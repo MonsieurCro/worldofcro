@@ -106,6 +106,7 @@ main::-webkit-scrollbar {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  color: white;
   background-color: rgba(0, 0, 0, .25);
   padding: 1.5%;
   transition: all .6s ease;
@@ -151,13 +152,15 @@ footer {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  gap: .25em;
   padding: .75em 0;
+  min-width: 0;
 }
 
 .pop .header h2 {
   margin: 0;
-  white-space: nowrap;
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
   font-size: 1rem;
   font-weight: 400;
