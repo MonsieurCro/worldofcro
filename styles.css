@@ -73,6 +73,7 @@ main {
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  overscroll-behavior-y: none;
 }
 
 main::-webkit-scrollbar {
@@ -118,6 +119,11 @@ a.panel:focus {
   flex: 2;
 }
 
+/* .panels:has(a.panel:hover) .panel:not(:hover),
+.panels:has(a.panel:focus) .panel:not(:focus) {
+  filter: grayscale(1);
+} */
+
 .panel img {
   max-width: 100%;
   max-height: 100%;
@@ -125,9 +131,9 @@ a.panel:focus {
 }
 
 footer {
-  background-color: rgb(0, 0, 0, .875);
   font-size: 75%;
   padding: .75em 1em;
+  background-color: rgb(161, 107, 79, .875);
 }
 
 
@@ -219,6 +225,7 @@ footer {
   display: block;
   max-width: 100%;
   margin: .875em auto;
+  border-radius: .25em;
 }
 
 .pop .content a {
